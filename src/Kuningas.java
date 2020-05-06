@@ -7,18 +7,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- * Sotilas luokka. Taydentaa Nappula luokkaa.
+ * Kuningas luokka. Taydentaa Nappula luokkaa.
  */
-public class Sotilas extends Nappula {
+public class Kuningas extends Nappula {
 	
 	/**
-	 * Sotilas luokan konstruktori. Asettaa Sotilaalle ID:n, kuvakkeen ja varin.
-	 * @param id Sotilaan ID, joka on yksilollinen.
-	 * @param vari Kumman puolen Sotilaasta on kyse.
+	 * Kuningas luokan konstruktori. Asettaa Kuninkaalle ID:n, kuvakkeen ja varin.
+	 * @param id Kuninkaan ID, joka on yksilollinen.
+	 * @param vari Kumman puolen Kuninkaasta on kyse.
 	 * @param x X-koordinaatti
 	 * @param y Y-koordinaatti
 	 */
-	public Sotilas(String id, int vari, int x, int y) {
+	public Kuningas(String id, int vari, int x, int y) {
 		this.id = id;
 		this.vari = vari;
 		this.x = x;
@@ -26,7 +26,7 @@ public class Sotilas extends Nappula {
 		
 		Image image = null;
 		try {
-			image = ImageIO.read(new File("src/Kuvakkeet/Pawn" + Integer.toString(vari) + ".png"));
+			image = ImageIO.read(new File("src/Kuvakkeet/King" + Integer.toString(vari) + ".png"));
 		} catch (IOException e) {
 			
 		}
