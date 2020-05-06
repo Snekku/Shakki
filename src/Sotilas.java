@@ -26,7 +26,7 @@ public class Sotilas extends Nappula {
 		
 		Image image = null;
 		try {
-			image = ImageIO.read(new File("src/Pawn" + Integer.toString(vari) + ".png"));
+			image = ImageIO.read(new File("src/Kuvakkeet/Pawn" + Integer.toString(vari) + ".png"));
 		} catch (IOException e) {
 			
 		}
