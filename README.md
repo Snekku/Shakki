@@ -1,5 +1,7 @@
 # Shakki sovellus, Joni Piispanen, joempiis@student.jyu.fi, Tietotekniikka, Tietotekniikan ohjelmointityö, 1.5.2020
 
+Sovelluksessa kaytetaan osoitteesta: https://commons.wikimedia.org/wiki/Category:PNG_chess_pieces/Standard_transparent haettuja kuvakkeita, jotka ovat osoitteesta https://creativecommons.org/licenses/by-sa/3.0/deed.en loytyvan lisenssin alla jaettu.
+
 Tietokoneohjelma, jossa voi pelata shakkia tietokonetta vastaan graafisen käyttöliittymän avulla. Ohjelmoin projektin käyttäen javaa ja graafisen käyttöliittymän käyttäen swingiä.
 
 Ohjelmoin työn käyttäen olio ohjelmoinnin periaatteita. Ohjelman rakenne näyttää alustavasti seuraavanlaiselta.
