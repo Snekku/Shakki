@@ -1,12 +1,15 @@
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 /**
  * Kayttoliittyma-luokka.
  */
-public class Kayttoliittyma {
+public class Kayttoliittyma implements MouseListener{
 	
     private JFrame ikkuna;
     private JPanel shakkiLauta;
@@ -27,6 +30,7 @@ public class Kayttoliittyma {
     	ikkuna.setMinimumSize(ikkuna.getSize());
     	ikkuna.setVisible(true);
     	ikkuna.setResizable(false);
+    	ikkuna.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
     
     /**
@@ -88,9 +92,39 @@ public class Kayttoliittyma {
 	            		 	break;
 				}
 				Ruutu = new Ruutu(i, j, nappula);
+				Ruutu.addMouseListener(this);
 				shakkiLauta.add(Ruutu);
 				shakkiLautaRuudut[i][j] = Ruutu;
 			}
 		}
     }
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		Ruutu ruutu = (Ruutu)e.getComponent();
+		ruutu.poistaNappula(ruutu);
+		shakkiLauta.repaint();
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e2) {
+		Ruutu ruutu2 = (Ruutu)e2.getComponent();
+		ruutu2.lisaaNappula(ruutu2);
+		shakkiLauta.repaint();
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		
+	}
 }

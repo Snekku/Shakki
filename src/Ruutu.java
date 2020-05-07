@@ -13,6 +13,7 @@ public class Ruutu extends JPanel {
 	private Nappula nappula;
 	private int x, y;
 	private JLabel label;
+	protected Nappula poistettuNappula;
 
 	/**
 	 * Ruutu luokan konstruktori. Asetetaan shakkilaudan ruutujen varit.
@@ -32,6 +33,21 @@ public class Ruutu extends JPanel {
 			this.nappula = n;
 			label = n.kuvake;
 			this.add(label);
+		}
+	}
+	
+	protected void poistaNappula(Ruutu ruutu) {
+		if (this.nappula != null) {
+			poistettuNappula = this.nappula;
+			this.nappula = null;
+			ruutu.remove(this.label);
+		}
+	}
+	
+	protected void lisaaNappula(Ruutu ruutu) {
+		if (poistettuNappula != null) {
+			this.nappula = poistettuNappula;
+			ruutu.add(poistettuNappula.kuvake);
 		}
 	}
 }
