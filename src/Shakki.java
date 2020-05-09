@@ -9,6 +9,7 @@ public class Shakki {
 	 * @param args Ei kaytossa.
 	 */
 	public static void main(String[] args) {
-        Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
+        @SuppressWarnings("unused")
+		Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
     }
 }

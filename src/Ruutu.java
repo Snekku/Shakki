@@ -11,14 +11,16 @@ public class Ruutu extends JPanel {
 
 	private static final long serialVersionUID = 1L; //valitti ilman tata, en taysin ymmartanyt mika sen funktio on
 	private Nappula nappula;
+	@SuppressWarnings("unused")
 	private int x, y;
 	private JLabel label;
-	protected Nappula poistettuNappula;
+	private Nappula taltio;
 
 	/**
 	 * Ruutu luokan konstruktori. Asetetaan shakkilaudan ruutujen varit.
 	 * @param x koordinaatti
 	 * @param y koordinaatti
+	 * @param n Nappula, joka lisataan ruutuun.
 	 */
 	public Ruutu(int x, int y, Nappula n) {
 		this.x = x;
@@ -36,18 +38,32 @@ public class Ruutu extends JPanel {
 		}
 	}
 	
-	protected void poistaNappula(Ruutu ruutu) {
-		if (this.nappula != null) {
-			poistettuNappula = this.nappula;
-			this.nappula = null;
-			ruutu.remove(this.label);
+	/**
+	 * Poistaa nappulan ruudusta.
+	 * @param ruutu Ruutu, josta nappula poistetaan.
+	 * @return Nappula palauttaa nappulan, joka poistettiin.
+	 */
+	protected Nappula poistaNappula(Ruutu ruutu) {
+		taltio = null;
+		if (ruutu.nappula != null) {
+			taltio = ruutu.nappula;
+			ruutu.nappula = null;
+			ruutu.remove(ruutu.label);
 		}
+		return taltio;
 	}
 	
-	protected void lisaaNappula(Ruutu ruutu) {
-		if (poistettuNappula != null) {
-			this.nappula = poistettuNappula;
-			ruutu.add(poistettuNappula.kuvake);
+	/**
+	 * Lisaa nappulan ruutuun.
+	 * @param ruutu2 Ruutu, johon nappula lisataan.
+	 * @param nappula Nappula, joka lisataan.
+	 */
+	protected void lisaaNappula(Ruutu ruutu2, Nappula nappula) {
+		if (ruutu2.nappula != null) {
+			taltio = poistaNappula(ruutu2);
 		}
+		this.nappula = nappula;
+		label = nappula.kuvake;
+		this.add(label);
 	}
 }

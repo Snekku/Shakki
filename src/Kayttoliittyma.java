@@ -1,7 +1,10 @@
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -9,13 +12,14 @@ import javax.swing.WindowConstants;
 /**
  * Kayttoliittyma-luokka.
  */
-public class Kayttoliittyma implements MouseListener{
+public class Kayttoliittyma implements MouseListener, MouseMotionListener{
 	
     private JFrame ikkuna;
     private JPanel shakkiLauta;
     private Ruutu[][] shakkiLautaRuudut;
     private Ruutu Ruutu;
     private Nappula nappula;
+    private boolean poista = true;
 	
     /**
      * Kayttoliittyma-luokan konstruktori. Luo kehyksen ja kutsuu alusta-metodia, joka laittaa laudan alkutilanteeseen.
@@ -101,21 +105,29 @@ public class Kayttoliittyma implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
+		Ruutu ruutu = (Ruutu)e.getComponent();
+		if (poista) {
+			nappula = ruutu.poistaNappula(ruutu);
+			poista = false;
+		} else {
+			if (nappula != null) {
+				ruutu.lisaaNappula(ruutu, nappula);
+				poista = true;
+			} else {
+				poista = true;
+			}
+		}
+		shakkiLauta.repaint();
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		Ruutu ruutu = (Ruutu)e.getComponent();
-		ruutu.poistaNappula(ruutu);
-		shakkiLauta.repaint();
+
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e2) {
-		Ruutu ruutu2 = (Ruutu)e2.getComponent();
-		ruutu2.lisaaNappula(ruutu2);
-		shakkiLauta.repaint();
+	public void mouseReleased(MouseEvent e) {
+
 	}
 
 	@Override
@@ -125,6 +137,16 @@ public class Kayttoliittyma implements MouseListener{
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
 		
 	}
 }
