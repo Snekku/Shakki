@@ -66,4 +66,30 @@ public class Ruutu extends JPanel {
 		label = nappula.kuvake;
 		this.add(label);
 	}
+	
+	/**
+	 * Kutsuu nappulan tarkistus metodia.
+	 * @param ruutu Ruutu, johon ollaan siirtymassa.
+	 * @param nappula Nappula jota siirretaan.
+	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
+	 */
+	protected Boolean laillinenSiirto(Ruutu ruutu, Nappula nappula) {
+		return nappula.nappulanLaillinenSiirto(ruutu, nappula);
+	}
+	
+	/**
+	 * Vertaa ruudun ja nappulan koordinaatteja.
+	 * @param ruutu Ruutu, johon siirrytaan.
+	 * @param X Nappulan X-koordinaatti.
+	 * @param Y Nappulan Y-koordinaatti.
+	 * @return Palauttaa X ja Y koordinaattien siirtyman.
+	 */
+	protected int[] vertaaKoordinaatit(Ruutu ruutu, int X, int Y) {
+		int[] koordinaatit = new int[2];
+		koordinaatit[0] = X-ruutu.x;
+		koordinaatit[1] = Y-ruutu.y;
+		return koordinaatit;
+	}
+	
+	
 }

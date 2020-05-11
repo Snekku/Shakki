@@ -32,4 +32,15 @@ public class Lahetti extends Nappula {
 		}
 		this.kuvake = new JLabel(new ImageIcon(image));
 	}
+	
+	/**
+	 * Tarkistaa onko siirto laillinen.
+	 * @param ruutu Ruutu, johon ollaan siirtymassa.
+ 	 * @param nappula Nappula, jota yritetaan siirtaa.
+ 	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
+	 */
+	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula) {
+		System.out.println("Lahetti");
+		return true;
+	}
 }
