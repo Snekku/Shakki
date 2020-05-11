@@ -16,9 +16,8 @@ public abstract class Nappula {
 	 * @param nappula Nappula, jota yritetaan siirtaa.
  	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
 	 */
-	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula) {
-		System.out.println("Nappula");
-		return nappula.nappulanLaillinenSiirto(ruutu, nappula);
+	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
+		return nappula.nappulanLaillinenSiirto(ruutu, nappula, shakkiLautaRuudut);
 	}
 	
 	/**
@@ -28,7 +27,26 @@ public abstract class Nappula {
 	 * @param y Y-koordinaatin siirtyma.
 	 */
 	protected void paivitaKoordinaatit(Nappula nappula, int x, int y) {
-		nappula.x = nappula.x - x;
-		nappula.y = nappula.y - y;
+		if (nappula.vari == 0) {
+			nappula.x = nappula.x + x;
+			nappula.y = nappula.y + y;
+		} else {
+			nappula.x = nappula.x - x;
+			nappula.y = nappula.y - y;
+		}
 	}
+	
+	/**
+	 * Tarkistaa onko ruudussa olevan nappulan ja siirrettavan nappulan varit erit.
+	 * @param nappula Nappula, jota yritetaan siirtaa.
+	 * @param ruudunNappula Nappula, joka on ruudussa, johon ollaan siirtymassa.
+	 * @return true tai false, sen mukaan ovatko varit erit.
+	 */
+	protected Boolean onkoVaritErit(Nappula ruudunNappula, Nappula nappula) {
+		if (ruudunNappula.vari == nappula.vari) {
+			return false;
+		}
+		return true;
+	}
+	
 }

@@ -37,10 +37,10 @@ public class Kuningatar extends Nappula {
 	 * Tarkistaa onko siirto laillinen.
 	 * @param ruutu Ruutu, johon ollaan siirtymassa.
  	 * @param nappula Nappula, jota yritetaan siirtaa.
+	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot
  	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
 	 */
-	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula) {
-		System.out.println("Kuningatar");
+	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
 		return true;
 	}
 }

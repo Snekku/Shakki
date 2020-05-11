@@ -11,7 +11,6 @@ public class Ruutu extends JPanel {
 
 	private static final long serialVersionUID = 1L; //valitti ilman tata, en taysin ymmartanyt mika sen funktio on
 	private Nappula nappula;
-	@SuppressWarnings("unused")
 	private int x, y;
 	private JLabel label;
 	private Nappula taltio;
@@ -71,10 +70,11 @@ public class Ruutu extends JPanel {
 	 * Kutsuu nappulan tarkistus metodia.
 	 * @param ruutu Ruutu, johon ollaan siirtymassa.
 	 * @param nappula Nappula jota siirretaan.
+	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot
 	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
 	 */
-	protected Boolean laillinenSiirto(Ruutu ruutu, Nappula nappula) {
-		return nappula.nappulanLaillinenSiirto(ruutu, nappula);
+	protected Boolean laillinenSiirto(Ruutu ruutu, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
+		return nappula.nappulanLaillinenSiirto(ruutu, nappula, shakkiLautaRuudut);
 	}
 	
 	/**
@@ -82,14 +82,44 @@ public class Ruutu extends JPanel {
 	 * @param ruutu Ruutu, johon siirrytaan.
 	 * @param X Nappulan X-koordinaatti.
 	 * @param Y Nappulan Y-koordinaatti.
+	 * @param vari Nappulan vari.
 	 * @return Palauttaa X ja Y koordinaattien siirtyman.
 	 */
-	protected int[] vertaaKoordinaatit(Ruutu ruutu, int X, int Y) {
+	protected int[] vertaaKoordinaatit(Ruutu ruutu, int X, int Y, int vari) {
 		int[] koordinaatit = new int[2];
-		koordinaatit[0] = X-ruutu.x;
-		koordinaatit[1] = Y-ruutu.y;
+		if (vari == 0) {
+			koordinaatit[0] = ruutu.x-X;
+			koordinaatit[1] = ruutu.y-Y;
+		} else {
+			koordinaatit[0] = X-ruutu.x;
+			koordinaatit[1] = Y-ruutu.y;
+		}
 		return koordinaatit;
 	}
 	
+	/**
+	 * Tarkistaa onko ruudussa nappulaa.
+	 * @param ruutu Ruutu, jonka sisaltoa tarkistetaan.
+	 * @return Palauttaa true tai false, sen mukaan onko ruudussa nappulaa.
+	 */
+	protected Boolean onkoRuudussaNappula(Ruutu ruutu) {
+		if (ruutu.nappula != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Tarkistaa onko ruudussa olevan nappulan vari eri kuin siirrettavan nappulan vari.
+	 * @param ruutu Ruutu, jonka sisaltoa tarkistetaan.
+	 * @param nappula Nappula, jota siirretaan.
+	 * @return Palauttaa true tai false, sen mukaan onko varit samat vai ei.
+	 */
+	protected Boolean onkoVaritErit(Ruutu ruutu, Nappula nappula) {
+		if (nappula.onkoVaritErit(ruutu.nappula, nappula)) {
+			return true;
+		}
+		return false;
+	}
 	
 }

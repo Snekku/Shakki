@@ -114,8 +114,9 @@ public class Kayttoliittyma implements MouseListener, MouseMotionListener{
 			poista = false;
 		} else {
 			if (nappula != null) {
-				if (ruutu.laillinenSiirto(ruutu, nappula)) {
+				if (ruutu.laillinenSiirto(ruutu, nappula, shakkiLautaRuudut)) {
 					ruutu.lisaaNappula(ruutu, nappula);
+					// TODO Paivita shakkiLautaRuudut
 				}
 				else {
 					edellinenRuutu.lisaaNappula(edellinenRuutu, nappula);
@@ -128,11 +129,6 @@ public class Kayttoliittyma implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		//Ei kaytossa
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
 		//Ei kaytossa
 	}
 
@@ -153,6 +149,11 @@ public class Kayttoliittyma implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
+		//Ei kaytossa
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
 		//Ei kaytossa
 	}
 }
