@@ -35,12 +35,21 @@ public class Kuningas extends Nappula {
 	
 	/**
 	 * Tarkistaa onko siirto laillinen.
-	 * @param ruutu Ruutu, johon ollaan siirtymassa.
- 	 * @param nappula Nappula, jota yritetaan siirtaa.
+	 * @param Ruutu Ruutu, johon ollaan siirtymassa.
+	 * @param nappula Nappula, jota yritetaan siirtaa.
 	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot
  	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
 	 */
 	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
-		return true;
+		int[] koordinaatit = ruutu.vertaaKoordinaatit(ruutu, nappula.x, nappula.y);
+		if (koordinaatit[0] == 1 || koordinaatit[0] == -1 || koordinaatit[0] == 0) {
+			if (koordinaatit[1] == 1 || koordinaatit[1] == -1 || koordinaatit[1] == 0) {
+				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

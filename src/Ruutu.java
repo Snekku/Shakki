@@ -82,10 +82,9 @@ public class Ruutu extends JPanel {
 	 * @param ruutu Ruutu, johon siirrytaan.
 	 * @param X Nappulan X-koordinaatti.
 	 * @param Y Nappulan Y-koordinaatti.
-	 * @param vari Nappulan vari.
 	 * @return Palauttaa X ja Y koordinaattien siirtyman.
 	 */
-	protected int[] vertaaKoordinaatit(Ruutu ruutu, int X, int Y, int vari) {
+	protected int[] vertaaKoordinaatit(Ruutu ruutu, int X, int Y) {
 		int[] koordinaatit = new int[2];
 		koordinaatit[0] = ruutu.x-X;
 		koordinaatit[1] = ruutu.y-Y;

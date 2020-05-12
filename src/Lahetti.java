@@ -41,7 +41,8 @@ public class Lahetti extends Nappula {
  	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
 	 */
 	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
-		int[] koordinaatit = ruutu.vertaaKoordinaatit(ruutu, nappula.x, nappula.y, nappula.vari);
+		//TODO Toiston purku.
+		int[] koordinaatit = ruutu.vertaaKoordinaatit(ruutu, nappula.x, nappula.y);
 		if (koordinaatit[0] == koordinaatit[1]) {
 			if (koordinaatit[0] < 0) {//vasen ylos
 				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {

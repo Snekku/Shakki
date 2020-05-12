@@ -41,7 +41,7 @@ public class Sotilas extends Nappula {
  	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
 	 */
 	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
-		int[] koordinaatit = ruutu.vertaaKoordinaatit(ruutu, nappula.x, nappula.y, nappula.vari);
+		int[] koordinaatit = ruutu.vertaaKoordinaatit(ruutu, nappula.x, nappula.y);
 		if (koordinaatit[0] == 0) {
 			if((koordinaatit[1] == 1 || koordinaatit[1] == -1) && !ruutu.onkoRuudussaNappula(ruutu)) {
 				nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);

@@ -35,12 +35,60 @@ public class Torni extends Nappula {
 	
 	/**
 	 * Tarkistaa onko siirto laillinen.
-	 * @param ruutu Ruutu, johon ollaan siirtymassa.
- 	 * @param nappula Nappula, jota yritetaan siirtaa.
- 	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot
+	 * @param Ruutu Ruutu, johon ollaan siirtymassa.
+	 * @param nappula Nappula, jota yritetaan siirtaa.
+	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot
  	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
 	 */
 	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
-		return true;
+		//TODO Toistun purkaminen, laittamalla esim. metodiin.
+		int[] koordinaatit = ruutu.vertaaKoordinaatit(ruutu, nappula.x, nappula.y);
+		if (koordinaatit[1] == 0) {
+			if (koordinaatit[0] < 0) {//vasen
+				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
+					for (int i=0;i<Math.abs(koordinaatit[0]);i++) {
+						if (shakkiLautaRuudut[nappula.x-i][nappula.y].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x-i][nappula.y])) {
+							return false;
+						}
+					}
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					return true;
+				}
+			} else {//oikee
+				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
+					for (int i=0;i<Math.abs(koordinaatit[0]);i++) {
+						if (shakkiLautaRuudut[nappula.x+i][nappula.y].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x+i][nappula.y])) {
+							return false;
+						}
+					}
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					return true;
+				}
+			}
+		}
+		if (koordinaatit[0] == 0) {
+			if (koordinaatit[1] < 0) {//ylos
+				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
+					for (int i=0;i<Math.abs(koordinaatit[0]);i++) {
+						if (shakkiLautaRuudut[nappula.x][nappula.y-i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y-i])) {
+							return false;
+						}
+					}
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					return true;
+				}
+			} else {//alas
+				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
+					for (int i=0;i<Math.abs(koordinaatit[0]);i++) {
+						if (shakkiLautaRuudut[nappula.x][nappula.y+i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x+i][nappula.y+i])) {
+							return false;
+						}
+					}
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
