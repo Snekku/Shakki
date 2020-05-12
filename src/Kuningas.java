@@ -45,7 +45,7 @@ public class Kuningas extends Nappula {
 		if (koordinaatit[0] == 1 || koordinaatit[0] == -1 || koordinaatit[0] == 0) {
 			if (koordinaatit[1] == 1 || koordinaatit[1] == -1 || koordinaatit[1] == 0) {
 				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
-					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
 			}

@@ -116,7 +116,6 @@ public class Kayttoliittyma implements MouseListener, MouseMotionListener{
 			if (nappula != null) {
 				if (ruutu.laillinenSiirto(ruutu, nappula, shakkiLautaRuudut)) {
 					ruutu.lisaaNappula(ruutu, nappula);
-					// TODO Paivita shakkiLautaRuudut
 				}
 				else {
 					edellinenRuutu.lisaaNappula(edellinenRuutu, nappula);

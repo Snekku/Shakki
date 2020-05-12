@@ -51,7 +51,7 @@ public class Lahetti extends Nappula {
 							return false;
 						}
 					}
-					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
 			} else {//oikee alas
@@ -61,7 +61,7 @@ public class Lahetti extends Nappula {
 							return false;
 						}
 					}
-					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
 			}
@@ -74,7 +74,7 @@ public class Lahetti extends Nappula {
 							return false;
 						}
 					}
-					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
 			} else {//oikee ylos
@@ -84,7 +84,7 @@ public class Lahetti extends Nappula {
 							return false;
 						}
 					}
-					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
 			}

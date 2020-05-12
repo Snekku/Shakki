@@ -14,10 +14,20 @@ public abstract class Nappula {
 	 * Kutsuu kyseessa olevan nappulan omaa tarkistus metodia.
 	 * @param ruutu Ruutu, johon ollaan siirtymassa.
 	 * @param nappula Nappula, jota yritetaan siirtaa.
+	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot 
  	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
 	 */
 	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
 		return nappula.nappulanLaillinenSiirto(ruutu, nappula, shakkiLautaRuudut);
+	}
+	
+	/**
+	 * Korottaa nappulan.
+	 * @param nappula Nappula, joka korotetaan
+	 * @return Palauttaa nappulan.
+	 */
+	protected Nappula korota(Nappula nappula) {
+		return nappula;
 	}
 	
 	/**
@@ -26,7 +36,7 @@ public abstract class Nappula {
 	 * @param x	X-koordinaatin siirtyma.
 	 * @param y Y-koordinaatin siirtyma.
 	 */
-	protected void paivitaKoordinaatit(Nappula nappula, int x, int y) {
+	protected void paivitaKoordinaatit(Ruutu ruutu, Nappula nappula, int x, int y) {
 		nappula.x = nappula.x + x;
 		nappula.y = nappula.y + y;
 	}

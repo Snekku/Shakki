@@ -34,6 +34,24 @@ public class Sotilas extends Nappula {
 	}
 	
 	/**
+	 * Korottaa sotilaan.
+	 * @param nappula Nappula, joka korotetaan.
+	 * @return Kuningatar, joksi sotilas korotettiin.
+	 */
+	protected Nappula korota(Nappula nappula) {
+		//TODO etsi paikka, jossa tata kutsutaan.
+		Nappula korotettuNappula = new Kuningatar(nappula.id.charAt(0) + "D2", nappula.vari, nappula.x, nappula.y);
+		Image image = null;
+		try {
+			image = ImageIO.read(new File("src/Kuvakkeet/Queen" + Integer.toString(nappula.vari) + ".png"));
+		} catch (IOException e) {
+				
+		}
+		korotettuNappula.kuvake = new JLabel(new ImageIcon(image));
+		return korotettuNappula;
+	}
+	
+	/**
 	 * Tarkistaa onko siirto laillinen.
 	 * @param Ruutu Ruutu, johon ollaan siirtymassa.
 	 * @param nappula Nappula, jota yritetaan siirtaa.
@@ -42,21 +60,22 @@ public class Sotilas extends Nappula {
 	 */
 	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
 		int[] koordinaatit = ruutu.vertaaKoordinaatit(ruutu, nappula.x, nappula.y);
+		
 		if (koordinaatit[0] == 0) {
 			if((koordinaatit[1] == 1 || koordinaatit[1] == -1) && !ruutu.onkoRuudussaNappula(ruutu)) {
-				nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+				nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
 				return true;
 			}
 			if(koordinaatit[1] == 2 || koordinaatit[1] == -2) {
 				if(nappula.y == 1 && !ruutu.onkoRuudussaNappula(ruutu)) {
 					if (!shakkiLautaRuudut[nappula.x][nappula.y+1].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y+1])) {
-						nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+						nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
 						return true;
 					}
 				}
 				if(nappula.y == 6 && !ruutu.onkoRuudussaNappula(ruutu)) {
 					if (!shakkiLautaRuudut[nappula.x][nappula.y-1].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y-1])) {
-						nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+						nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
 						return true;
 					}
 				}
@@ -64,7 +83,7 @@ public class Sotilas extends Nappula {
 		}
 		if ((koordinaatit[0] == 1 || koordinaatit[0] == -1) && (koordinaatit[1] == 1 || koordinaatit[1] == -1)) {
 			if (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula)) {
-				nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+				nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
 				return true;
 			}
 		}
