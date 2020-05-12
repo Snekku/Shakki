@@ -27,13 +27,8 @@ public abstract class Nappula {
 	 * @param y Y-koordinaatin siirtyma.
 	 */
 	protected void paivitaKoordinaatit(Nappula nappula, int x, int y) {
-		if (nappula.vari == 0) {
-			nappula.x = nappula.x + x;
-			nappula.y = nappula.y + y;
-		} else {
-			nappula.x = nappula.x - x;
-			nappula.y = nappula.y - y;
-		}
+		nappula.x = nappula.x + x;
+		nappula.y = nappula.y + y;
 	}
 	
 	/**

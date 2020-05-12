@@ -43,17 +43,7 @@ public class Lahetti extends Nappula {
 	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
 		int[] koordinaatit = ruutu.vertaaKoordinaatit(ruutu, nappula.x, nappula.y, nappula.vari);
 		if (koordinaatit[0] == koordinaatit[1]) {
-			if (koordinaatit[0] < 0) {
-				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
-					for (int i=0;i<Math.abs(koordinaatit[0]);i++) {
-						if (shakkiLautaRuudut[nappula.x+i][nappula.y+i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x+i][nappula.y+i])) {
-							return false;
-						}
-					}
-					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
-					return true;
-				}
-			} else {
+			if (koordinaatit[0] < 0) {//vasen ylos
 				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
 					for (int i=0;i<Math.abs(koordinaatit[0]);i++) {
 						if (shakkiLautaRuudut[nappula.x-i][nappula.y-i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x-i][nappula.y-i])) {
@@ -63,23 +53,33 @@ public class Lahetti extends Nappula {
 					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
-			}
-		}
-		if (koordinaatit[0] == koordinaatit[1]*-1 || koordinaatit[0]*-1 == koordinaatit[1]) {
-			if (koordinaatit[0] < 0) {
+			} else {//oikee alas
 				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
 					for (int i=0;i<Math.abs(koordinaatit[0]);i++) {
-						if (shakkiLautaRuudut[nappula.x+i][nappula.y-i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x+i][nappula.y-i])) {
+						if (shakkiLautaRuudut[nappula.x+i][nappula.y+i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x+i][nappula.y+i])) {
 							return false;
 						}
 					}
 					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
-			} else {
+			}
+		}
+		if (koordinaatit[0] == koordinaatit[1]*-1 || koordinaatit[0]*-1 == koordinaatit[1]) {
+			if (koordinaatit[0] < 0) {//vasen alas
 				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
 					for (int i=0;i<Math.abs(koordinaatit[0]);i++) {
 						if (shakkiLautaRuudut[nappula.x-i][nappula.y+i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x-i][nappula.y+i])) {
+							return false;
+						}
+					}
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					return true;
+				}
+			} else {//oikee ylos
+				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
+					for (int i=0;i<Math.abs(koordinaatit[0]);i++) {
+						if (shakkiLautaRuudut[nappula.x+i][nappula.y-i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x+i][nappula.y-i])) {
 							return false;
 						}
 					}

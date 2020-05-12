@@ -87,13 +87,8 @@ public class Ruutu extends JPanel {
 	 */
 	protected int[] vertaaKoordinaatit(Ruutu ruutu, int X, int Y, int vari) {
 		int[] koordinaatit = new int[2];
-		if (vari == 0) {
-			koordinaatit[0] = ruutu.x-X;
-			koordinaatit[1] = ruutu.y-Y;
-		} else {
-			koordinaatit[0] = X-ruutu.x;
-			koordinaatit[1] = Y-ruutu.y;
-		}
+		koordinaatit[0] = ruutu.x-X;
+		koordinaatit[1] = ruutu.y-Y;
 		return koordinaatit;
 	}
 	

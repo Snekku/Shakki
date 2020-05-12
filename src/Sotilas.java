@@ -11,8 +11,6 @@ import javax.swing.JLabel;
  */
 public class Sotilas extends Nappula {
 	
-	private int kasvaakoY;
-	
 	/**
 	 * Sotilas luokan konstruktori. Asettaa Sotilaalle ID:n, kuvakkeen ja varin.
 	 * @param id Sotilaan ID, joka on yksilollinen.
@@ -43,27 +41,28 @@ public class Sotilas extends Nappula {
  	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
 	 */
 	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
-		if (nappula.vari == 0) {
-			kasvaakoY = 1;
-		} else {
-			kasvaakoY = -1;
-		}
 		int[] koordinaatit = ruutu.vertaaKoordinaatit(ruutu, nappula.x, nappula.y, nappula.vari);
 		if (koordinaatit[0] == 0) {
-			if(koordinaatit[1] == 1 && !ruutu.onkoRuudussaNappula(ruutu)) {
+			if((koordinaatit[1] == 1 || koordinaatit[1] == -1) && !ruutu.onkoRuudussaNappula(ruutu)) {
 				nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 				return true;
 			}
-			if(koordinaatit[1] == 2) {
-				if(nappula.y == 1 || nappula.y == 6 && !ruutu.onkoRuudussaNappula(ruutu)) {
-					if (!shakkiLautaRuudut[nappula.x][nappula.y+kasvaakoY].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y+kasvaakoY])) {
+			if(koordinaatit[1] == 2 || koordinaatit[1] == -2) {
+				if(nappula.y == 1 && !ruutu.onkoRuudussaNappula(ruutu)) {
+					if (!shakkiLautaRuudut[nappula.x][nappula.y+1].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y+1])) {
+						nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+						return true;
+					}
+				}
+				if(nappula.y == 6 && !ruutu.onkoRuudussaNappula(ruutu)) {
+					if (!shakkiLautaRuudut[nappula.x][nappula.y-1].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y-1])) {
 						nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 						return true;
 					}
 				}
 			}
 		}
-		if ((koordinaatit[0] == 1 || koordinaatit[0] == -1) && koordinaatit[1] == 1) {
+		if ((koordinaatit[0] == 1 || koordinaatit[0] == -1) && (koordinaatit[1] == 1 || koordinaatit[1] == -1)) {
 			if (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula)) {
 				nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 				return true;
