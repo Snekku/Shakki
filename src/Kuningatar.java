@@ -51,7 +51,7 @@ public class Kuningatar extends Nappula {
 							return false;
 						}
 					}
-					nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
 			} else {//oikee
@@ -61,7 +61,7 @@ public class Kuningatar extends Nappula {
 							return false;
 						}
 					}
-					nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
 			}
@@ -74,7 +74,7 @@ public class Kuningatar extends Nappula {
 							return false;
 						}
 					}
-					nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
 			} else {//alas
@@ -84,7 +84,7 @@ public class Kuningatar extends Nappula {
 							return false;
 						}
 					}
-					nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
 			}
@@ -97,7 +97,7 @@ public class Kuningatar extends Nappula {
 							return false;
 						}
 					}
-					nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
 			} else {//oikee alas
@@ -107,7 +107,7 @@ public class Kuningatar extends Nappula {
 							return false;
 						}
 					}
-					nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
 			}
@@ -120,7 +120,7 @@ public class Kuningatar extends Nappula {
 							return false;
 						}
 					}
-					nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
 			} else {//oikee ylos
@@ -130,7 +130,7 @@ public class Kuningatar extends Nappula {
 							return false;
 						}
 					}
-					nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 					return true;
 				}
 			}

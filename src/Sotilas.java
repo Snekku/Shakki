@@ -39,15 +39,7 @@ public class Sotilas extends Nappula {
 	 * @return Kuningatar, joksi sotilas korotettiin.
 	 */
 	protected Nappula korota(Nappula nappula) {
-		//TODO etsi paikka, jossa tata kutsutaan.
 		Nappula korotettuNappula = new Kuningatar(nappula.id.charAt(0) + "D2", nappula.vari, nappula.x, nappula.y);
-		Image image = null;
-		try {
-			image = ImageIO.read(new File("src/Kuvakkeet/Queen" + Integer.toString(nappula.vari) + ".png"));
-		} catch (IOException e) {
-				
-		}
-		korotettuNappula.kuvake = new JLabel(new ImageIcon(image));
 		return korotettuNappula;
 	}
 	
@@ -63,19 +55,19 @@ public class Sotilas extends Nappula {
 		
 		if (koordinaatit[0] == 0) {
 			if((koordinaatit[1] == 1 || koordinaatit[1] == -1) && !ruutu.onkoRuudussaNappula(ruutu)) {
-				nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
+				nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 				return true;
 			}
 			if(koordinaatit[1] == 2 || koordinaatit[1] == -2) {
 				if(nappula.y == 1 && !ruutu.onkoRuudussaNappula(ruutu)) {
 					if (!shakkiLautaRuudut[nappula.x][nappula.y+1].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y+1])) {
-						nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
+						nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 						return true;
 					}
 				}
 				if(nappula.y == 6 && !ruutu.onkoRuudussaNappula(ruutu)) {
 					if (!shakkiLautaRuudut[nappula.x][nappula.y-1].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y-1])) {
-						nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
+						nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 						return true;
 					}
 				}
@@ -83,7 +75,7 @@ public class Sotilas extends Nappula {
 		}
 		if ((koordinaatit[0] == 1 || koordinaatit[0] == -1) && (koordinaatit[1] == 1 || koordinaatit[1] == -1)) {
 			if (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula)) {
-				nappula.paivitaKoordinaatit(ruutu, nappula, koordinaatit[0], koordinaatit[1]);
+				nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 				return true;
 			}
 		}

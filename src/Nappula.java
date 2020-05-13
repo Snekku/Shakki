@@ -36,7 +36,7 @@ public abstract class Nappula {
 	 * @param x	X-koordinaatin siirtyma.
 	 * @param y Y-koordinaatin siirtyma.
 	 */
-	protected void paivitaKoordinaatit(Ruutu ruutu, Nappula nappula, int x, int y) {
+	protected void paivitaKoordinaatit(Nappula nappula, int x, int y) {
 		nappula.x = nappula.x + x;
 		nappula.y = nappula.y + y;
 	}

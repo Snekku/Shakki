@@ -74,21 +74,21 @@ public class Kayttoliittyma implements MouseListener, MouseMotionListener{
 	            	case 6: nappula = new Sotilas("VS" + Integer.toString(j), 1, j, i);
 	                     	break;
 	            	case 7:  switch (j) {
-						case 0: nappula = new Torni("TT1", 1, j, i);
+						case 0: nappula = new Torni("VT1", 1, j, i);
 								break;
-						case 1: nappula = new Ratsu("TR1", 1, j, i);
+						case 1: nappula = new Ratsu("VR1", 1, j, i);
 								break;
-						case 2: nappula = new Lahetti("TL1", 1, j, i);
+						case 2: nappula = new Lahetti("VL1", 1, j, i);
 								break;
-						case 3: nappula = new Kuningatar("TD", 1, j, i);
+						case 3: nappula = new Kuningatar("VD", 1, j, i);
 								break;
-						case 4: nappula = new Kuningas("TK", 1, j, i);
+						case 4: nappula = new Kuningas("VK", 1, j, i);
 								break;
-						case 5: nappula = new Lahetti("TL2", 1, j, i);
+						case 5: nappula = new Lahetti("VL2", 1, j, i);
 								break;
-						case 6: nappula = new Ratsu("TR2", 1, j, i);
+						case 6: nappula = new Ratsu("VR2", 1, j, i);
 								break;
-						case 7: nappula = new Torni("TT2", 1, j, i);
+						case 7: nappula = new Torni("VT2", 1, j, i);
 								break;
 						default: nappula = null;
 								break;
@@ -115,6 +115,9 @@ public class Kayttoliittyma implements MouseListener, MouseMotionListener{
 		} else {
 			if (nappula != null) {
 				if (ruutu.laillinenSiirto(ruutu, nappula, shakkiLautaRuudut)) {
+					if ((nappula.y == 0 || nappula.y == 7) && nappula.id.contains("S")) {
+						nappula = nappula.korota(nappula);
+					}
 					ruutu.lisaaNappula(ruutu, nappula);
 				}
 				else {
@@ -123,6 +126,7 @@ public class Kayttoliittyma implements MouseListener, MouseMotionListener{
 			}
 			poista = true;
 		}
+		shakkiLauta.revalidate();
 		shakkiLauta.repaint();
 	}
 
