@@ -2,7 +2,6 @@
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,7 +10,7 @@ import javax.swing.WindowConstants;
 /**
  * Kayttoliittyma-luokka.
  */
-public class Kayttoliittyma implements MouseListener, MouseMotionListener{
+public class Kayttoliittyma implements MouseListener{
 	
     private JFrame ikkuna;
     private JPanel shakkiLauta;
@@ -20,6 +19,9 @@ public class Kayttoliittyma implements MouseListener, MouseMotionListener{
     private Ruutu edellinenRuutu;
     private Nappula nappula;
     private boolean poista = true;
+    private int edellinenVari = 0;
+    private int valkeanKorotukset = 0;
+    private int tummanKorotukset = 0;
 	
     /**
      * Kayttoliittyma-luokan konstruktori. Luo kehyksen ja kutsuu alusta-metodia, 
@@ -39,7 +41,7 @@ public class Kayttoliittyma implements MouseListener, MouseMotionListener{
     }
     
     /**
-     * Alustaa kayttoliittyman, luomalla ruudut ja lisaamalla ne shakkilautaan. 
+     * Alustaa kayttoliittyman, luomalla ruudut ja nappulat, jonka jalkeen lisaa ne shakkilautaan. 
      * Taman jalkeen lisaa nappulat ruutuihin.
      */
     public final void alusta() {
@@ -109,16 +111,25 @@ public class Kayttoliittyma implements MouseListener, MouseMotionListener{
 	public void mouseClicked(MouseEvent e) {
 		Ruutu ruutu = (Ruutu)e.getComponent();
 		if (poista) {
-			edellinenRuutu = ruutu;
-			nappula = ruutu.poistaNappula(ruutu);
-			poista = false;
+			if (ruutu.nappulanVari(ruutu) != edellinenVari) {
+				edellinenRuutu = ruutu;
+				nappula = ruutu.poistaNappula(ruutu);
+				poista = false;
+			}
 		} else {
 			if (nappula != null) {
 				if (ruutu.laillinenSiirto(ruutu, nappula, shakkiLautaRuudut)) {
 					if ((nappula.y == 0 || nappula.y == 7) && nappula.id.contains("S")) {
-						nappula = nappula.korota(nappula);
+						if (nappula.vari == 0) {
+							nappula = nappula.korota(nappula, tummanKorotukset);
+							tummanKorotukset += 1;
+						} else {
+							nappula = nappula.korota(nappula, valkeanKorotukset);
+							valkeanKorotukset += 1;
+						}
 					}
 					ruutu.lisaaNappula(ruutu, nappula);
+					edellinenVari = nappula.vari;
 				}
 				else {
 					edellinenRuutu.lisaaNappula(edellinenRuutu, nappula);
@@ -142,16 +153,6 @@ public class Kayttoliittyma implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		//Ei kaytossa
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-		//Ei kaytossa
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
 		//Ei kaytossa
 	}
 

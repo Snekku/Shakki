@@ -26,7 +26,7 @@ public abstract class Nappula {
 	 * @param nappula Nappula, joka korotetaan
 	 * @return Palauttaa nappulan.
 	 */
-	protected Nappula korota(Nappula nappula) {
+	protected Nappula korota(Nappula nappula, int korotukset) {
 		return nappula;
 	}
 	

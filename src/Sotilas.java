@@ -38,8 +38,8 @@ public class Sotilas extends Nappula {
 	 * @param nappula Nappula, joka korotetaan.
 	 * @return Kuningatar, joksi sotilas korotettiin.
 	 */
-	protected Nappula korota(Nappula nappula) {
-		Nappula korotettuNappula = new Kuningatar(nappula.id.charAt(0) + "D2", nappula.vari, nappula.x, nappula.y);
+	protected Nappula korota(Nappula nappula, int korotukset) {
+		Nappula korotettuNappula = new Kuningatar(nappula.id.charAt(0) + "D" + Integer.toString(korotukset+2), nappula.vari, nappula.x, nappula.y);
 		return korotettuNappula;
 	}
 	

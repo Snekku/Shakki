@@ -116,4 +116,18 @@ public class Ruutu extends JPanel {
 		return false;
 	}
 	
+	/**
+	 * Katsoo nappulan varin.
+	 * @param ruutu Ruutu, jonka sisaltoa tarkistetaan.
+	 * @return Palauttaa 0 tai 1, sen mukaan onko vari valkea vai tumma.
+	 */
+	protected int nappulanVari(Ruutu ruutu) {
+		if (ruutu.nappula != null) {
+			if (ruutu.nappula.vari == 0) {
+				return 0;
+			}
+		}
+		return 1;
+	}
+	
 }
