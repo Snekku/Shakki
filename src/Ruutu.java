@@ -104,6 +104,15 @@ public class Ruutu extends JPanel {
 	}
 	
 	/**
+	 * Tarkistaa onko ruudussa torni.
+	 * @param ruutu Ruutu, jonka sisaltoa tarkistetaan.
+	 * @return Palauttaa true tai false, sen mukaan onko ruudussa torni.
+	 */
+	protected Boolean onkoTorniLiikkunut(Ruutu ruutu) {
+		return ruutu.nappula.onkoTorniLiikkunut(ruutu.nappula);
+	}
+	
+	/**
 	 * Tarkistaa onko ruudussa olevan nappulan vari eri kuin siirrettavan nappulan vari.
 	 * @param ruutu Ruutu, jonka sisaltoa tarkistetaan.
 	 * @param nappula Nappula, jota siirretaan.

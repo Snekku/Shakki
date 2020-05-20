@@ -11,6 +11,8 @@ import javax.swing.JLabel;
  */
 public class Kuningas extends Nappula {
 	
+	private boolean liikkunut = false;
+	
 	/**
 	 * Kuningas luokan konstruktori. Asettaa Kuninkaalle ID:n, kuvakkeen ja varin.
 	 * @param id Kuninkaan ID, joka on yksilollinen.
@@ -46,6 +48,35 @@ public class Kuningas extends Nappula {
 			if (koordinaatit[1] == 1 || koordinaatit[1] == -1 || koordinaatit[1] == 0) {
 				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
 					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					liikkunut = true;
+					return true;
+				}
+			}
+		}
+		if (liikkunut == false && (koordinaatit[0] == 2 && koordinaatit[1] == 0)) {
+			if (!ruutu.onkoRuudussaNappula(ruutu)) {
+				for (int i=0;i<7-nappula.x;i++) {
+					if (shakkiLautaRuudut[nappula.x+i][nappula.y].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x+i][nappula.y])) {
+						return false;
+					}
+				}
+				if(!shakkiLautaRuudut[nappula.x+3][nappula.y].onkoTorniLiikkunut(shakkiLautaRuudut[nappula.x+3][nappula.y])); {
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					liikkunut = true;
+					return true;
+				}
+			}
+		}
+		if (liikkunut == false && (koordinaatit[0] == -2 && koordinaatit[1] == 0)) {
+			if (!ruutu.onkoRuudussaNappula(ruutu)) {
+				for (int i=0;i<nappula.x;i++) {
+					if (shakkiLautaRuudut[nappula.x-i][nappula.y].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x-i][nappula.y])) {
+						return false;
+					}
+				}
+				if(!shakkiLautaRuudut[nappula.x-4][nappula.y].onkoTorniLiikkunut(shakkiLautaRuudut[nappula.x-4][nappula.y])); {
+					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					liikkunut = true;
 					return true;
 				}
 			}

@@ -31,6 +31,15 @@ public abstract class Nappula {
 	}
 	
 	/**
+	 * Tarkistaa onko kyseessa torni.
+	 * @param nappula Nappula, jota tarkastetaan.
+	 * @return Palauttaa true.
+	 */
+	protected boolean onkoTorniLiikkunut(Nappula nappula) {
+		return true;
+	}
+	
+	/**
 	 * Paivittaa nappulan koordinaatit.
 	 * @param nappula Nappula, jota yritetaan siirtaa.
 	 * @param x	X-koordinaatin siirtyma.

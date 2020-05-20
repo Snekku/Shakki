@@ -69,7 +69,7 @@ public class Kuningatar extends Nappula {
 		if (koordinaatit[0] == 0) {
 			if (koordinaatit[1] < 0) {//ylos
 				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
-					for (int i=0;i<Math.abs(koordinaatit[0]);i++) {
+					for (int i=0;i<Math.abs(koordinaatit[1]);i++) {
 						if (shakkiLautaRuudut[nappula.x][nappula.y-i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y-i])) {
 							return false;
 						}
@@ -79,8 +79,8 @@ public class Kuningatar extends Nappula {
 				}
 			} else {//alas
 				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
-					for (int i=0;i<Math.abs(koordinaatit[0]);i++) {
-						if (shakkiLautaRuudut[nappula.x][nappula.y+i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x+i][nappula.y+i])) {
+					for (int i=0;i<Math.abs(koordinaatit[1]);i++) {
+						if (shakkiLautaRuudut[nappula.x][nappula.y+i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y+i])) {
 							return false;
 						}
 					}
