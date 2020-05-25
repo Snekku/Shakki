@@ -67,6 +67,27 @@ public class Ruutu extends JPanel {
 	}
 	
 	/**
+	 * Lisaa nappulan ruutuun. Erillinen metodi linnoittautumista varten.
+	 * @param ruutu1 Ruutu, johon nappula lisataan.
+	 * @param ruutu2 Ruutu, josta nappula poistetaan.
+	 */
+	protected void poistaJaLisaaNappula(Ruutu ruutu1, Ruutu ruutu2) {
+		ruutu1.nappula = ruutu2.nappula;
+		label = ruutu1.nappula.kuvake;
+		ruutu1.add(label);
+		ruutu2.nappula = null;
+		ruutu2.remove(ruutu2.label);
+	}
+	
+	/**
+	 * Paivittaa ruudun nappulan koordinaatit. Erillinen metodi linnoittautumista varten.
+	 * @param ruutu1 Ruutu, jonka nappulan koordinaatteja paivitetaan.
+	 */
+	protected void paivitaNappulanKoordinaatit(Ruutu ruutu1) {
+		ruutu1.nappula.paivitaNappulanKoordinaatit(nappula, ruutu1.x, ruutu1.y);
+	}
+	
+	/**
 	 * Kutsuu nappulan tarkistus metodia.
 	 * @param ruutu Ruutu, johon ollaan siirtymassa.
 	 * @param nappula Nappula jota siirretaan.
@@ -109,7 +130,10 @@ public class Ruutu extends JPanel {
 	 * @return Palauttaa true tai false, sen mukaan onko ruudussa torni.
 	 */
 	protected Boolean onkoTorniLiikkunut(Ruutu ruutu) {
-		return ruutu.nappula.onkoTorniLiikkunut(ruutu.nappula);
+		if (ruutu.nappula != null) {
+			return ruutu.nappula.onkoTorniLiikkunut(ruutu.nappula);
+		}
+		return true;
 	}
 	
 	/**

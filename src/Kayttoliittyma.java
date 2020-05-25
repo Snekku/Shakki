@@ -109,6 +109,7 @@ public class Kayttoliittyma implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		//TODO: bugi, kun lisaa nappulan samaan ruutuun josta se lahti, vuoro vaihtuu.
 		Ruutu ruutu = (Ruutu)e.getComponent();
 		if (poista) {
 			if (ruutu.nappulanVari(ruutu) != edellinenVari) {

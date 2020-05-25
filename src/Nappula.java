@@ -51,6 +51,17 @@ public abstract class Nappula {
 	}
 	
 	/**
+	 * Paivittaa nappulan koordinaatit. Erillinen metodi linnoittautumista varten.
+	 * @param nappula Nappula, jota yritetaan siirtaa.
+	 * @param x	Uusi x-koordinaatti.
+	 * @param y Uusi y-koordinaatti.
+	 */
+	protected void paivitaNappulanKoordinaatit(Nappula nappula, int x, int y) {
+		nappula.x = x;
+		nappula.y = y;
+	}
+	
+	/**
 	 * Tarkistaa onko ruudussa olevan nappulan ja siirrettavan nappulan varit erit.
 	 * @param nappula Nappula, jota yritetaan siirtaa.
 	 * @param ruudunNappula Nappula, joka on ruudussa, johon ollaan siirtymassa.

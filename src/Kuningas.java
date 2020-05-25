@@ -60,7 +60,9 @@ public class Kuningas extends Nappula {
 						return false;
 					}
 				}
-				if(!shakkiLautaRuudut[nappula.x+3][nappula.y].onkoTorniLiikkunut(shakkiLautaRuudut[nappula.x+3][nappula.y])); {
+				if(!shakkiLautaRuudut[nappula.x+3][nappula.y].onkoTorniLiikkunut(shakkiLautaRuudut[nappula.x+3][nappula.y])) {
+					shakkiLautaRuudut[nappula.x+1][nappula.y].poistaJaLisaaNappula(shakkiLautaRuudut[nappula.x+1][nappula.y], shakkiLautaRuudut[nappula.x+3][nappula.y]);
+					shakkiLautaRuudut[nappula.x+1][nappula.y].paivitaNappulanKoordinaatit(shakkiLautaRuudut[nappula.x+1][nappula.y]);
 					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 					liikkunut = true;
 					return true;
@@ -74,7 +76,9 @@ public class Kuningas extends Nappula {
 						return false;
 					}
 				}
-				if(!shakkiLautaRuudut[nappula.x-4][nappula.y].onkoTorniLiikkunut(shakkiLautaRuudut[nappula.x-4][nappula.y])); {
+				if(!shakkiLautaRuudut[nappula.x-4][nappula.y].onkoTorniLiikkunut(shakkiLautaRuudut[nappula.x-4][nappula.y])) {
+					shakkiLautaRuudut[nappula.x-1][nappula.y].poistaJaLisaaNappula(shakkiLautaRuudut[nappula.x-1][nappula.y], shakkiLautaRuudut[nappula.x-4][nappula.y]);
+					shakkiLautaRuudut[nappula.x-1][nappula.y].paivitaNappulanKoordinaatit(shakkiLautaRuudut[nappula.x-1][nappula.y]);
 					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 					liikkunut = true;
 					return true;
