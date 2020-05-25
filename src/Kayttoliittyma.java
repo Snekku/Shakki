@@ -22,7 +22,12 @@ public class Kayttoliittyma implements MouseListener{
     private int edellinenVari = 0;
     private int valkeanKorotukset = 0;
     private int tummanKorotukset = 0;
-	
+    private Ruutu[][] mahdollisetSiirrot;
+    private Ruutu valkeanKuninkaanRuutu;
+    private Ruutu tummanKuninkaanRuutu;
+    private boolean onkoShakki = false;
+	private boolean onkoOhiSyontiMahdollinen;
+    
     /**
      * Kayttoliittyma-luokan konstruktori. Luo kehyksen ja kutsuu alusta-metodia, 
      * joka laittaa laudan alkutilanteeseen.
@@ -105,11 +110,12 @@ public class Kayttoliittyma implements MouseListener{
 				shakkiLautaRuudut[j][i] = Ruutu;
 			}
 		}
+		valkeanKuninkaanRuutu = shakkiLautaRuudut[4][7];
+		tummanKuninkaanRuutu = shakkiLautaRuudut[4][0];
     }
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		//TODO: bugi, kun lisaa nappulan samaan ruutuun josta se lahti, vuoro vaihtuu.
 		Ruutu ruutu = (Ruutu)e.getComponent();
 		if (poista) {
 			if (ruutu.nappulanVari(ruutu) != edellinenVari) {
@@ -130,7 +136,16 @@ public class Kayttoliittyma implements MouseListener{
 						}
 					}
 					ruutu.lisaaNappula(ruutu, nappula);
-					edellinenVari = nappula.vari;
+					//TODO: tarkista mahdolliset siirrot.
+					if (ruutu != edellinenRuutu) {
+						edellinenVari = nappula.vari;
+					}
+					if (nappula.id.contains("VK")) {
+						valkeanKuninkaanRuutu = ruutu;
+					}
+					if (nappula.id.contains("TK")) {
+						tummanKuninkaanRuutu = ruutu;
+					}
 				}
 				else {
 					edellinenRuutu.lisaaNappula(edellinenRuutu, nappula);
