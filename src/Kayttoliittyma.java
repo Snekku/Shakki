@@ -136,7 +136,22 @@ public class Kayttoliittyma implements MouseListener{
 						}
 					}
 					ruutu.lisaaNappula(ruutu, nappula);
-					//TODO: tarkista mahdolliset siirrot.
+					/*
+					for(int i=0;i<8;i++) {
+						for(int j=0;j<8;j++) {
+							if (shakkiLautaRuudut[j][i].nappulanVari(shakkiLautaRuudut[j][i]) != edellinenVari) {
+								for(int k=0;k<8;k++) {
+									for (int l=0;l<8;l++) {
+										if (shakkiLautaRuudut[j][i].laillinenSiirto(shakkiLautaRuudut[l][k], nappula, shakkiLautaRuudut)) {//ei toimi viela
+											//TODO: lisaa laillinen siirto tietorakenteeseen, vertaa tietorakennetta kuninkaan paikkaan
+										}
+									}
+								}
+							}
+						}
+					}
+					*/
+					
 					if (ruutu != edellinenRuutu) {
 						edellinenVari = nappula.vari;
 					}
