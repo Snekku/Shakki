@@ -166,7 +166,7 @@ public class Kayttoliittyma implements MouseListener{
 	}
 	
     /**
-     * Tarkistaa mahdolliset siirrot.
+     * Tarkistaa mahdolliset siirrot ja merkitsee kuninkaan ruudun reunukset punaiseksi mikali on shakki.
      */
 	private void tarkistaMahdollisetSiirrot() {
 		mahdollisetSiirrot.clear();
