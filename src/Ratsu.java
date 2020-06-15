@@ -63,7 +63,8 @@ public class Ratsu extends Nappula {
 	
 	/**
 	 * Tarkistaa onko siirto laillinen.
-	 * @param Ruutu Ruutu, johon ollaan siirtymassa.
+	 * @param ruutu Ruutu, josta ollaan siirtymassa.
+	 * @param ruutu2 Ruutu, johon ollaan siirtymassa.
 	 * @param nappula Nappula, jota yritetaan siirtaa.
 	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot
  	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
