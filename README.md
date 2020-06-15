@@ -2,6 +2,8 @@
 
 Sovelluksessa kaytetaan osoitteesta: https://commons.wikimedia.org/wiki/Category:PNG_chess_pieces/Standard_transparent haettuja kuvakkeita, jotka ovat osoitteesta https://creativecommons.org/licenses/by-sa/3.0/deed.en loytyvan lisenssin alla jaettu.
 
+Ohjelma toimii painamalla shakkinappulaa ja taman jalkeen painamalla ruutua, johon haluat siirtaa nappulan. Nappula nayttaa haviavan, mutta ilmestyy ruutuun johon haluat sen liikuttaa tai mahdollisesti ruutuun, josta se lahti mikali siirto on laiton.
+
 Tietokoneohjelma, jossa voi pelata shakkia tietokonetta vastaan graafisen käyttöliittymän avulla. Ohjelmoin projektin käyttäen javaa ja graafisen käyttöliittymän käyttäen swingiä.
 
 Ohjelmoin työn käyttäen olio ohjelmoinnin periaatteita. Ohjelman rakenne näyttää alustavasti seuraavanlaiselta.
