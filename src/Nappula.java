@@ -22,6 +22,17 @@ public abstract class Nappula {
 	}
 	
 	/**
+	 * Kutsuu kyseessa olevan nappulan omaa tarkistus metodia.
+	 * @param ruutu Ruutu, johon ollaan siirtymassa.
+	 * @param nappula Nappula, jota yritetaan siirtaa.
+	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot 
+ 	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
+	 */
+	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Ruutu ruutu2, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
+		return nappula.nappulanLaillinenSiirto(ruutu, ruutu2, nappula, shakkiLautaRuudut);
+	}
+	
+	/**
 	 * Korottaa nappulan.
 	 * @param nappula Nappula, joka korotetaan
 	 * @return Palauttaa nappulan.

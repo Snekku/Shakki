@@ -1,8 +1,12 @@
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -22,7 +26,7 @@ public class Kayttoliittyma implements MouseListener{
     private int edellinenVari = 0;
     private int valkeanKorotukset = 0;
     private int tummanKorotukset = 0;
-    private Ruutu[][] mahdollisetSiirrot;
+    private List<Ruutu> mahdollisetSiirrot = new ArrayList<Ruutu> (100);
     private Ruutu valkeanKuninkaanRuutu;
     private Ruutu tummanKuninkaanRuutu;
     private boolean onkoShakki = false;
@@ -136,30 +140,19 @@ public class Kayttoliittyma implements MouseListener{
 						}
 					}
 					ruutu.lisaaNappula(ruutu, nappula);
-					/*
-					for(int i=0;i<8;i++) {
-						for(int j=0;j<8;j++) {
-							if (shakkiLautaRuudut[j][i].nappulanVari(shakkiLautaRuudut[j][i]) != edellinenVari) {
-								for(int k=0;k<8;k++) {
-									for (int l=0;l<8;l++) {
-										if (shakkiLautaRuudut[j][i].laillinenSiirto(shakkiLautaRuudut[l][k], nappula, shakkiLautaRuudut)) {//ei toimi viela
-											//TODO: lisaa laillinen siirto tietorakenteeseen, vertaa tietorakennetta kuninkaan paikkaan
-										}
-									}
-								}
-							}
-						}
-					}
-					*/
 					
-					if (ruutu != edellinenRuutu) {
-						edellinenVari = nappula.vari;
-					}
 					if (nappula.id.contains("VK")) {
 						valkeanKuninkaanRuutu = ruutu;
 					}
+					
 					if (nappula.id.contains("TK")) {
 						tummanKuninkaanRuutu = ruutu;
+					}
+					
+					tarkistaMahdollisetSiirrot();
+					
+					if (ruutu != edellinenRuutu) {
+						edellinenVari = nappula.vari;
 					}
 				}
 				else {
@@ -170,6 +163,34 @@ public class Kayttoliittyma implements MouseListener{
 		}
 		shakkiLauta.revalidate();
 		shakkiLauta.repaint();
+	}
+	
+    /**
+     * Tarkistaa mahdolliset siirrot.
+     */
+	private void tarkistaMahdollisetSiirrot() {
+		mahdollisetSiirrot.clear();
+		for(int i=0;i<8;i++) {
+			for(int j=0;j<8;j++) {
+				if (shakkiLautaRuudut[j][i].nappulanVari(shakkiLautaRuudut[j][i]) != edellinenVari) {
+					for(int k=0;k<8;k++) {
+						for (int l=0;l<8;l++) {
+							if (shakkiLautaRuudut[j][i].laillinenSiirto(shakkiLautaRuudut[j][i], shakkiLautaRuudut[l][k], shakkiLautaRuudut)) {
+								mahdollisetSiirrot.add(shakkiLautaRuudut[l][k]);
+								if (shakkiLautaRuudut[l][k].onkoRuudutSamat(shakkiLautaRuudut[l][k], tummanKuninkaanRuutu)) {
+									onkoShakki = true;
+									tummanKuninkaanRuutu.setBorder(BorderFactory.createLineBorder(Color.red));
+								}
+								if (shakkiLautaRuudut[l][k].onkoRuudutSamat(shakkiLautaRuudut[l][k], valkeanKuninkaanRuutu)) {
+									onkoShakki = true;
+									valkeanKuninkaanRuutu.setBorder(BorderFactory.createLineBorder(Color.red));
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	@Override

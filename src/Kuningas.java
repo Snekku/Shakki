@@ -87,4 +87,47 @@ public class Kuningas extends Nappula {
 		}
 		return false;
 	}
+	
+	/**
+	 * Tarkistaa onko siirto laillinen.
+	 * @param Ruutu Ruutu, johon ollaan siirtymassa.
+	 * @param nappula Nappula, jota yritetaan siirtaa.
+	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot
+ 	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
+	 */
+	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Ruutu ruutu2, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
+		int[] koordinaatit = ruutu2.vertaaKoordinaatit(ruutu2, nappula.x, nappula.y);
+		if (koordinaatit[0] == 1 || koordinaatit[0] == -1 || koordinaatit[0] == 0) {
+			if (koordinaatit[1] == 1 || koordinaatit[1] == -1 || koordinaatit[1] == 0) {
+				if (!ruutu2.onkoRuudussaNappula(ruutu2) || (ruutu2.onkoRuudussaNappula(ruutu2) && ruutu2.onkoVaritErit(ruutu2, nappula))) {
+					return true;
+				}
+			}
+		}
+		if (liikkunut == false && (koordinaatit[0] == 2 && koordinaatit[1] == 0)) {
+			if (!ruutu2.onkoRuudussaNappula(ruutu2)) {
+				for (int i=0;i<7-nappula.x;i++) {
+					if (shakkiLautaRuudut[nappula.x+i][nappula.y].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x+i][nappula.y])) {
+						return false;
+					}
+				}
+				if(!shakkiLautaRuudut[nappula.x+3][nappula.y].onkoTorniLiikkunut(shakkiLautaRuudut[nappula.x+3][nappula.y])) {
+					return true;
+				}
+			}
+		}
+		if (liikkunut == false && (koordinaatit[0] == -2 && koordinaatit[1] == 0)) {
+			if (!ruutu2.onkoRuudussaNappula(ruutu2)) {
+				for (int i=0;i<nappula.x;i++) {
+					if (shakkiLautaRuudut[nappula.x-i][nappula.y].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x-i][nappula.y])) {
+						return false;
+					}
+				}
+				if(!shakkiLautaRuudut[nappula.x-4][nappula.y].onkoTorniLiikkunut(shakkiLautaRuudut[nappula.x-4][nappula.y])) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

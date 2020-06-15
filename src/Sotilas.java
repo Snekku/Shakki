@@ -81,4 +81,39 @@ public class Sotilas extends Nappula {
 		}
 		return false;
 	}
+	
+	/**
+	 * Tarkistaa onko siirto laillinen.
+	 * @param Ruutu Ruutu, johon ollaan siirtymassa.
+	 * @param nappula Nappula, jota yritetaan siirtaa.
+	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot 
+ 	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
+	 */
+	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Ruutu ruutu2, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
+		int[] koordinaatit = ruutu2.vertaaKoordinaatit(ruutu2, nappula.x, nappula.y);
+		
+		if (koordinaatit[0] == 0) {
+			if((koordinaatit[1] == 1 || koordinaatit[1] == -1) && !ruutu2.onkoRuudussaNappula(ruutu2)) {
+				return true;
+			}
+			if(koordinaatit[1] == 2 || koordinaatit[1] == -2) {
+				if(nappula.y == 1 && !ruutu2.onkoRuudussaNappula(ruutu2)) {
+					if (!shakkiLautaRuudut[nappula.x][nappula.y+1].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y+1])) {
+						return true;
+					}
+				}
+				if(nappula.y == 6 && !ruutu2.onkoRuudussaNappula(ruutu2)) {
+					if (!shakkiLautaRuudut[nappula.x][nappula.y-1].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y-1])) {
+						return true;
+					}
+				}
+			}
+		}
+		if ((koordinaatit[0] == 1 || koordinaatit[0] == -1) && (koordinaatit[1] == 1 || koordinaatit[1] == -1)) {
+			if (ruutu2.onkoRuudussaNappula(ruutu2) && ruutu2.onkoVaritErit(ruutu2, nappula)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

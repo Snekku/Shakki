@@ -99,6 +99,20 @@ public class Ruutu extends JPanel {
 	}
 	
 	/**
+	 * Kutsuu nappulan tarkistus metodia.
+	 * @param ruutu Ruutu, johon ollaan siirtymassa.
+	 * @param nappula Nappula jota siirretaan.
+	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot
+	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
+	 */
+	protected Boolean laillinenSiirto(Ruutu ruutu, Ruutu ruutu2, Ruutu[][] shakkiLautaRuudut) {
+		if (ruutu.nappula != null) {
+			return ruutu.nappula.nappulanLaillinenSiirto(ruutu, ruutu2, ruutu.nappula, shakkiLautaRuudut);
+		}
+		return false;
+	}
+	
+	/**
 	 * Vertaa ruudun ja nappulan koordinaatteja.
 	 * @param ruutu Ruutu, johon siirrytaan.
 	 * @param X Nappulan X-koordinaatti.
@@ -161,6 +175,19 @@ public class Ruutu extends JPanel {
 			}
 		}
 		return 1;
+	}
+	
+	/**
+	 * Tarkistaa onko kyseessa sama ruutu.
+	 * @param ruutu Ensimmainen ruutu.
+	 * @param ruutu2 Toinen ruutu.
+	 * @return Palauttaa true tai false sen mukaan tasmaavatko ruutujen koordinaatit.
+	 */
+	protected boolean onkoRuudutSamat(Ruutu ruutu, Ruutu ruutu2) {
+		if (ruutu.x == ruutu2.x && ruutu.y == ruutu2.y) {
+			return true;
+		}
+		return false;
 	}
 	
 }

@@ -60,4 +60,30 @@ public class Ratsu extends Nappula {
 		}
 		return false;
 	}
+	
+	/**
+	 * Tarkistaa onko siirto laillinen.
+	 * @param Ruutu Ruutu, johon ollaan siirtymassa.
+	 * @param nappula Nappula, jota yritetaan siirtaa.
+	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot
+ 	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
+	 */
+	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Ruutu ruutu2, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
+		int[] koordinaatit = ruutu2.vertaaKoordinaatit(ruutu2, nappula.x, nappula.y);
+		if (koordinaatit[0] == 1 || koordinaatit[0] == -1) {
+			if (koordinaatit[1] == 2 || koordinaatit[1] == -2) {
+				if (!ruutu2.onkoRuudussaNappula(ruutu2) || (ruutu2.onkoRuudussaNappula(ruutu2) && ruutu2.onkoVaritErit(ruutu2, nappula))) {
+					return true;
+				}
+			}
+		}
+		if (koordinaatit[0] == 2 || koordinaatit[0] == -2) {
+			if (koordinaatit[1] == 1 || koordinaatit[1] == -1) {
+				if (!ruutu2.onkoRuudussaNappula(ruutu2) || (ruutu2.onkoRuudussaNappula(ruutu2) && ruutu2.onkoVaritErit(ruutu2, nappula))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
