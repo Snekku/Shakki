@@ -54,7 +54,7 @@ public class Sotilas extends Nappula {
 		int[] koordinaatit = ruutu.vertaaKoordinaatit(ruutu, nappula.x, nappula.y);
 		
 		if (koordinaatit[0] == 0) {
-			if((koordinaatit[1] == 1 || koordinaatit[1] == -1) && !ruutu.onkoRuudussaNappula(ruutu)) {
+			if(((koordinaatit[1] == 1 && nappula.vari == 0) || (koordinaatit[1] == -1 && nappula.vari == 1)) && !ruutu.onkoRuudussaNappula(ruutu)) {
 				nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 				return true;
 			}
