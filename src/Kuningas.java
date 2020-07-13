@@ -48,6 +48,9 @@ public class Kuningas extends Nappula {
 			if (koordinaatit[1] == 1 || koordinaatit[1] == -1 || koordinaatit[1] == 0) {
 				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
 					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
+					if (koordinaatit[0] == 0 && koordinaatit[1] == 0) {
+						return false;
+					}
 					liikkunut = true;
 					return true;
 				}

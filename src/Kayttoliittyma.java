@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class Kayttoliittyma implements MouseListener{
     private JFrame ikkuna;
     private JPanel shakkiLauta;
     private Ruutu[][] shakkiLautaRuudut;
+    private Tekoaly tekoaly = new Tekoaly();
     private Ruutu Ruutu;
     private Ruutu edellinenRuutu;
     private Nappula nappula;
@@ -26,11 +28,12 @@ public class Kayttoliittyma implements MouseListener{
     private int edellinenVari = 0;
     private int valkeanKorotukset = 0;
     private int tummanKorotukset = 0;
+    private List<Ruutu> lahtoRuudut = new ArrayList<Ruutu> (100);
     private List<Ruutu> mahdollisetSiirrot = new ArrayList<Ruutu> (100);
     private Ruutu valkeanKuninkaanRuutu;
     private Ruutu tummanKuninkaanRuutu;
     private boolean onkoShakki = false;
-	private boolean onkoOhiSyontiMahdollinen;
+	private boolean onkoMatti = false;
     
     /**
      * Kayttoliittyma-luokan konstruktori. Luo kehyksen ja kutsuu alusta-metodia, 
@@ -122,38 +125,31 @@ public class Kayttoliittyma implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		Ruutu ruutu = (Ruutu)e.getComponent();
 		if (poista) {
-			if (ruutu.nappulanVari(ruutu) != edellinenVari) {
-				edellinenRuutu = ruutu;
-				nappula = ruutu.poistaNappula(ruutu);
-				poista = false;
-			}
+			edellinenRuutu = ruutu;
+			nappula = ruutu.poistaNappula(ruutu);
+			poista = false;
 		} else {
 			if (nappula != null) {
 				if (ruutu.laillinenSiirto(ruutu, nappula, shakkiLautaRuudut)) {
 					if ((nappula.y == 0 || nappula.y == 7) && nappula.id.contains("S")) {
-						if (nappula.vari == 0) {
-							nappula = nappula.korota(nappula, tummanKorotukset);
-							tummanKorotukset += 1;
-						} else {
-							nappula = nappula.korota(nappula, valkeanKorotukset);
-							valkeanKorotukset += 1;
-						}
+						nappula = nappula.korota(nappula, valkeanKorotukset);
+						valkeanKorotukset += 1;
 					}
 					ruutu.lisaaNappula(ruutu, nappula);
-					
-					if (nappula.id.contains("VK")) {
-						valkeanKuninkaanRuutu = ruutu;
-					}
-					
+						
 					if (nappula.id.contains("TK")) {
 						tummanKuninkaanRuutu = ruutu;
 					}
-					
+						
 					tarkistaMahdollisetSiirrot();
-					
-					if (ruutu != edellinenRuutu) {
-						edellinenVari = nappula.vari;
+						
+						//TODO: reaktio shakkiin, tekoalyn siirrot, bugisia, korjaa ettei vastustajan nappuloita voi liikuttaa
+						
+					onkoMatti = ruutu.tarkistaLauta(shakkiLautaRuudut);
+					if (onkoMatti) {
+						ikkuna.dispatchEvent(new WindowEvent(ikkuna, WindowEvent.WINDOW_CLOSING));
 					}
+					tarkistaTekoalynSiirrot();
 				}
 				else {
 					edellinenRuutu.lisaaNappula(edellinenRuutu, nappula);
@@ -191,6 +187,43 @@ public class Kayttoliittyma implements MouseListener{
 				}
 			}
 		}
+	}
+	
+    /**
+     * Tarkistaa mahdolliset siirrot ja merkitsee kuninkaan ruudun reunukset punaiseksi mikali on shakki. 
+     */
+	private void tarkistaTekoalynSiirrot() {
+		mahdollisetSiirrot.clear();
+		lahtoRuudut.clear();
+		for(int i=0;i<8;i++) {
+			for(int j=0;j<8;j++) {
+				if (shakkiLautaRuudut[j][i].nappulanVari(shakkiLautaRuudut[j][i]) == 0) {
+					for(int k=0;k<8;k++) {
+						for (int l=0;l<8;l++) {
+							if (shakkiLautaRuudut[j][i].laillinenSiirto(shakkiLautaRuudut[j][i], shakkiLautaRuudut[l][k], shakkiLautaRuudut)) {
+								lahtoRuudut.add(shakkiLautaRuudut[j][i]);
+								mahdollisetSiirrot.add(shakkiLautaRuudut[l][k]);
+							}
+						}
+					}
+				}
+			}
+		}
+		Ruutu[] ruudut = tekoaly.valitseSiirto(mahdollisetSiirrot, lahtoRuudut);
+		nappula = ruudut[0].poistaNappula(ruudut[0]);
+		if ((nappula.y == 0 || nappula.y == 7) && nappula.id.contains("S")) {
+			if (nappula.vari == 0) {
+				nappula = nappula.korota(nappula, tummanKorotukset);
+				tummanKorotukset += 1;
+			}
+		}
+		ruudut[1].lisaaNappula(ruudut[1], nappula);
+		if (nappula.id.contains("TK")) {
+			tummanKuninkaanRuutu = ruudut[1];
+		}
+		tarkistaMahdollisetSiirrot();
+		shakkiLauta.revalidate();
+		shakkiLauta.repaint();
 	}
 
 	@Override

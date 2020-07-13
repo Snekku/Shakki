@@ -191,4 +191,29 @@ public class Ruutu extends JPanel {
 		return false;
 	}
 	
+	/**
+	 * Tarkistaa loytyyko molemmat kuninkaat laudalta.
+	 * @param shakkiLautaRuudut shakki lauta
+	 * @return Palauttaa true tai false sen mukaan loytyyko kuninkaat.
+	 */
+	protected boolean tarkistaLauta(Ruutu[][] shakkiLautaRuudut) {
+		boolean valkeaKuningas = false;
+		boolean tummaKuningas = false;
+		for (int i=0;i<8;i++) {
+			for (int j=0;j<8;j++) {
+				if (shakkiLautaRuudut[j][i].nappula != null) {
+					if (shakkiLautaRuudut[j][i].nappula.id.contains("VK")) {
+						valkeaKuningas = true;
+					}
+					if (shakkiLautaRuudut[j][i].nappula.id.contains("TK")) {
+						tummaKuningas = true;
+					}
+				}
+			}
+		}
+		if (valkeaKuningas && tummaKuningas) {
+			return false;
+		}
+		return true;
+	}
 }
