@@ -75,8 +75,8 @@ public abstract class Nappula {
 	
 	/**
 	 * Tarkistaa onko ruudussa olevan nappulan ja siirrettavan nappulan varit erit.
-	 * @param nappula Nappula, jota yritetaan siirtaa.
 	 * @param ruudunNappula Nappula, joka on ruudussa, johon ollaan siirtymassa.
+	 * @param nappula Nappula, jota yritetaan siirtaa.
 	 * @return true tai false, sen mukaan ovatko varit erit.
 	 */
 	protected Boolean onkoVaritErit(Nappula ruudunNappula, Nappula nappula) {

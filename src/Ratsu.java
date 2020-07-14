@@ -42,6 +42,11 @@ public class Ratsu extends Nappula {
 	 */
 	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
 		int[] koordinaatit = ruutu.vertaaKoordinaatit(ruutu, nappula.x, nappula.y);
+		
+		if (koordinaatit[0] == 0 && koordinaatit[1] == 0) {
+			return false;
+		}
+		
 		if (koordinaatit[0] == 1 || koordinaatit[0] == -1) {
 			if (koordinaatit[1] == 2 || koordinaatit[1] == -2) {
 				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {

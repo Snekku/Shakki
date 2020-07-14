@@ -44,13 +44,15 @@ public class Kuningas extends Nappula {
 	 */
 	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
 		int[] koordinaatit = ruutu.vertaaKoordinaatit(ruutu, nappula.x, nappula.y);
+		
+		if (koordinaatit[0] == 0 && koordinaatit[1] == 0) {
+			return false;
+		}
+		
 		if (koordinaatit[0] == 1 || koordinaatit[0] == -1 || koordinaatit[0] == 0) {
 			if (koordinaatit[1] == 1 || koordinaatit[1] == -1 || koordinaatit[1] == 0) {
 				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
 					nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
-					if (koordinaatit[0] == 0 && koordinaatit[1] == 0) {
-						return false;
-					}
 					liikkunut = true;
 					return true;
 				}

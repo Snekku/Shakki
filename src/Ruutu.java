@@ -102,7 +102,6 @@ public class Ruutu extends JPanel {
 	 * Kutsuu nappulan tarkistus metodia.
 	 * @param ruutu Ruutu, josta ollaan siirtymassa.
 	 * @param ruutu2 Ruutu, johon ollaan siirtymassa.
-	 * @param nappula Nappula jota siirretaan.
 	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot
 	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
 	 */
@@ -193,7 +192,7 @@ public class Ruutu extends JPanel {
 	
 	/**
 	 * Tarkistaa loytyyko molemmat kuninkaat laudalta.
-	 * @param shakkiLautaRuudut shakki lauta
+	 * @param shakkiLautaRuudut shakkilauta
 	 * @return Palauttaa true tai false sen mukaan loytyyko kuninkaat.
 	 */
 	protected boolean tarkistaLauta(Ruutu[][] shakkiLautaRuudut) {

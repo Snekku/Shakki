@@ -43,6 +43,11 @@ public class Kuningatar extends Nappula {
 	protected Boolean nappulanLaillinenSiirto(Ruutu ruutu, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
 		//TODO Toistuvan koodin laittaminen metodiin. Mikali aikaa jaa.
 		int[] koordinaatit = ruutu.vertaaKoordinaatit(ruutu, nappula.x, nappula.y);
+		
+		if (koordinaatit[0] == 0 && koordinaatit[1] == 0) {
+			return false;
+		}
+		
 		if (koordinaatit[1] == 0) {
 			if (koordinaatit[0] < 0) {//vasen
 				if (!ruutu.onkoRuudussaNappula(ruutu) || (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula))) {
