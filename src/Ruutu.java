@@ -90,21 +90,6 @@ public class Ruutu extends JPanel {
 	}
 	
 	/**
-	 * Tarkistaa hyokkaako ruudussa oleva nappula ruutuun2. Palauttaa automaattisesti true kaikkien muiden paitsi sotilaan kohdalla.
-	 * @param ruutu Ruutu, josta ollaan liikkumassa.
-	 * @param ruutu2 Ruutu, johon ollaan liikkumassa.
-	 * @return Palauttaa true tai false sen mukaan hyokataanko ruutuun.
-	 */
-	protected int[] koordinaatit(Ruutu ruutu, Ruutu ruutu2) {
-		int[] koords = new int[4];
-		koords[0] = ruutu.x;
-		koords[1] = ruutu.y;
-		koords[2] = ruutu2.x;
-		koords[3] = ruutu2.y;
-		return koords;
-	}
-	
-	/**
 	 * Kutsuu nappulan tarkistus metodia.
 	 * @param ruutu Ruutu, johon ollaan siirtymassa.
 	 * @param nappula Nappula jota siirretaan.
