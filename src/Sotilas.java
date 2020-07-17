@@ -62,7 +62,7 @@ public class Sotilas extends Nappula {
 				nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 				return true;
 			}
-			if(koordinaatit[1] == 2 || koordinaatit[1] == -2) {
+			if((koordinaatit[1] == 2 && nappula.vari == 0) || (koordinaatit[1] == -2 && nappula.vari == 1)) {
 				if(nappula.y == 1 && !ruutu.onkoRuudussaNappula(ruutu)) {
 					if (!shakkiLautaRuudut[nappula.x][nappula.y+1].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y+1])) {
 						nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
@@ -77,7 +77,7 @@ public class Sotilas extends Nappula {
 				}
 			}
 		}
-		if ((koordinaatit[0] == 1 || koordinaatit[0] == -1) && (koordinaatit[1] == 1 || koordinaatit[1] == -1)) {
+		if (((koordinaatit[0] == 1 || koordinaatit[0] == -1) && (koordinaatit[1] == 1 && nappula.vari == 0)) || ((koordinaatit[0] == 1 || koordinaatit[0] == -1) && (koordinaatit[1] == -1 && nappula.vari == 1))) {
 			if (ruutu.onkoRuudussaNappula(ruutu) && ruutu.onkoVaritErit(ruutu, nappula)) {
 				nappula.paivitaKoordinaatit(nappula, koordinaatit[0], koordinaatit[1]);
 				return true;
@@ -101,7 +101,7 @@ public class Sotilas extends Nappula {
 			if(((koordinaatit[1] == 1 && nappula.vari == 0) || (koordinaatit[1] == -1 && nappula.vari == 1)) && !ruutu2.onkoRuudussaNappula(ruutu2)) {
 				return true;
 			}
-			if(koordinaatit[1] == 2 || koordinaatit[1] == -2) {
+			if((koordinaatit[1] == 2 && nappula.vari == 0) || (koordinaatit[1] == -2 && nappula.vari == 1)) {
 				if(nappula.y == 1 && !ruutu2.onkoRuudussaNappula(ruutu2)) {
 					if (!shakkiLautaRuudut[nappula.x][nappula.y+1].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y+1])) {
 						return true;
@@ -114,10 +114,25 @@ public class Sotilas extends Nappula {
 				}
 			}
 		}
-		if ((koordinaatit[0] == 1 || koordinaatit[0] == -1) && (koordinaatit[1] == 1 || koordinaatit[1] == -1)) {
+		if (((koordinaatit[0] == 1 || koordinaatit[0] == -1) && (koordinaatit[1] == 1 && nappula.vari == 0)) || ((koordinaatit[0] == 1 || koordinaatit[0] == -1) && (koordinaatit[1] == -1 && nappula.vari == 1))) {
 			if (ruutu2.onkoRuudussaNappula(ruutu2) && ruutu2.onkoVaritErit(ruutu2, nappula)) {
 				return true;
 			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Tarkistaa hyokkaako Sotilas ruutuun.
+	 * @param ruutu Ruutu, josta ollaan siirtymassa.
+	 * @param ruutu2 Ruutu, johon ollaan siirtymassa.
+	 * @param nappula Nappula, jota yritetaan siirtaa.
+ 	 * @return Palauttaa true tai false, sen mukaan hyokataanko ruutuun.
+	 */
+	protected Boolean hyokkaakoRuutuun(Ruutu ruutu, Ruutu ruutu2, Nappula nappula) {
+		int[] koordinaatit = ruutu2.vertaaKoordinaatit(ruutu2, nappula.x, nappula.y);
+		if ((koordinaatit[0] == 1 || koordinaatit[0] == -1) && koordinaatit[1] == 1) {
+			return true;
 		}
 		return false;
 	}

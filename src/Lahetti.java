@@ -152,6 +152,53 @@ public class Lahetti extends Nappula {
 		}
 		return false;
 	}
-	
-
+	/**
+	 * Tarkistaa onko siirto laillinen.
+	 * @param ruutu Ruutu, josta ollaan siirtymassa.
+	 * @param ruutu2 Ruutu, johon ollaan siirtymassa.
+	 * @param nappula Nappula, jota yritetaan siirtaa.
+	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot
+ 	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
+	 */
+	protected Boolean nappulanLaillinenSiirtoErillinen(Ruutu ruutu, Ruutu ruutu2, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
+		int[] koordinaatit = ruutu2.vertaaKoordinaatit(ruutu2, nappula.x, nappula.y);
+		if (koordinaatit[0] == 0 && koordinaatit[1] == 0) {
+			return false;
+		}
+		if (koordinaatit[0] == koordinaatit[1]) {
+			if (koordinaatit[0] < 0) {//vasen ylos
+				for (int i=1;i<Math.abs(koordinaatit[0]);i++) {
+					if (shakkiLautaRuudut[nappula.x-i][nappula.y-i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x-i][nappula.y-i])) {
+						return false;
+					}
+				}
+				return true;
+			} else {//oikee alas
+				for (int i=1;i<Math.abs(koordinaatit[0]);i++) {
+					if (shakkiLautaRuudut[nappula.x+i][nappula.y+i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x+i][nappula.y+i])) {
+						return false;
+					}
+				}
+				return true;
+			}
+		}
+		if (koordinaatit[0] == koordinaatit[1]*-1 || koordinaatit[0]*-1 == koordinaatit[1]) {
+			if (koordinaatit[0] < 0) {//vasen alas
+				for (int i=1;i<Math.abs(koordinaatit[0]);i++) {
+					if (shakkiLautaRuudut[nappula.x-i][nappula.y+i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x-i][nappula.y+i])) {
+						return false;
+					}
+				}
+				return true;
+			} else {//oikee ylos
+				for (int i=1;i<Math.abs(koordinaatit[0]);i++) {
+					if (shakkiLautaRuudut[nappula.x+i][nappula.y-i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x+i][nappula.y-i])) {
+						return false;
+					}
+				}
+				return true;
+			}
+		}
+		return false;
+	}
 }

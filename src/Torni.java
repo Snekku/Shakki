@@ -160,6 +160,56 @@ public class Torni extends Nappula {
 	}
 	
 	/**
+	 * Tarkistaa onko siirto laillinen. Erillinen metodi hyokattyjen ruutujen tarkistukseen.
+	 * @param ruutu Ruutu, josta ollaan siirtymassa.
+	 * @param ruutu2 Ruutu, johon ollaan siirtymassa.
+	 * @param nappula Nappula, jota yritetaan siirtaa.
+	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot
+ 	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
+	 */
+	protected Boolean nappulanLaillinenSiirtoErillinen(Ruutu ruutu, Ruutu ruutu2, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
+		int[] koordinaatit = ruutu2.vertaaKoordinaatit(ruutu2, nappula.x, nappula.y);
+		if (koordinaatit[0] == 0 && koordinaatit[1] == 0) {
+			return false;
+		}
+		if (koordinaatit[1] == 0) {
+			if (koordinaatit[0] < 0) {//vasen
+				for (int i=1;i<Math.abs(koordinaatit[0]);i++) {
+					if (shakkiLautaRuudut[nappula.x-i][nappula.y].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x-i][nappula.y])) {
+						return false;
+					}
+				}
+				return true;
+			} else {//oikee
+				for (int i=1;i<Math.abs(koordinaatit[0]);i++) {
+					if (shakkiLautaRuudut[nappula.x+i][nappula.y].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x+i][nappula.y])) {
+						return false;
+					}
+				}
+				return true;
+			}
+		}
+		if (koordinaatit[0] == 0) {
+			if (koordinaatit[1] < 0) {//ylos
+				for (int i=1;i<Math.abs(koordinaatit[1]);i++) {
+					if (shakkiLautaRuudut[nappula.x][nappula.y-i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y-i])) {
+						return false;
+					}
+				}
+				return true;
+			} else {//alas
+				for (int i=1;i<Math.abs(koordinaatit[1]);i++) {
+					if (shakkiLautaRuudut[nappula.x][nappula.y+i].onkoRuudussaNappula(shakkiLautaRuudut[nappula.x][nappula.y+i])) {
+						return false;
+					}
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * Tarkistaako onko torni liikkunut.
 	 * @param nappula Nappula, jota tarkastetaan.
 	 * @return Palauttaa nappulan.

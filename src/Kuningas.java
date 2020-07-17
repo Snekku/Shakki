@@ -136,4 +136,25 @@ public class Kuningas extends Nappula {
 		}
 		return false;
 	}
+	
+	/**
+	 * Kutsuu kyseessa olevan nappulan omaa tarkistus metodia. Erillinen metodi hyokattyjen ruutujen tarkistukseen.
+	 * @param ruutu Ruutu, josta ollaan siirtymassa.
+	 * @param ruutu2 Ruutu, johon ollaan siirtymassa.
+	 * @param nappula Nappula, jota yritetaan siirtaa.
+	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot 
+ 	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
+	 */
+	protected Boolean nappulanLaillinenSiirtoErillinen(Ruutu ruutu, Ruutu ruutu2, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
+		int[] koordinaatit = ruutu2.vertaaKoordinaatit(ruutu2, nappula.x, nappula.y);
+		if (koordinaatit[0] == 0 && koordinaatit[1] == 0) {
+			return false;
+		}
+		if (koordinaatit[0] == 1 || koordinaatit[0] == -1 || koordinaatit[0] == 0) {
+			if (koordinaatit[1] == 1 || koordinaatit[1] == -1 || koordinaatit[1] == 0) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

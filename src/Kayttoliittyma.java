@@ -29,7 +29,10 @@ public class Kayttoliittyma implements MouseListener{
     private int valkeanKorotukset = 0;
     private int tummanKorotukset = 0;
     private List<Ruutu> lahtoRuudut = new ArrayList<Ruutu> (100);
-    private List<Ruutu> mahdollisetSiirrot = new ArrayList<Ruutu> (100);
+    private List<Ruutu> valkeanMahdollisetSiirrot = new ArrayList<Ruutu> (1000);
+    private List<Ruutu> tummanHyokatytRuudut = new ArrayList<Ruutu> (1000);
+    private List<Ruutu> tummanLahtoRuudut = new ArrayList<Ruutu> (1000);
+    private List<Ruutu> tummanMahdollisetSiirrot = new ArrayList<Ruutu> (1000);
     private Ruutu valkeanKuninkaanRuutu;
     private Ruutu tummanKuninkaanRuutu;
     private boolean onkoShakki = false;
@@ -132,30 +135,36 @@ public class Kayttoliittyma implements MouseListener{
 			}
 		} else {
 			if (nappula != null) {
-				if (ruutu.laillinenSiirto(ruutu, nappula, shakkiLautaRuudut)) {
-					if ((nappula.y == 0 || nappula.y == 7) && nappula.id.contains("S")) {
-						nappula = nappula.korota(nappula, valkeanKorotukset);
-						valkeanKorotukset += 1;
+				if ((nappula.id.contains("VK") && ruutu.onkoHyokattyRuutu(ruutu, tummanHyokatytRuudut)) || !nappula.id.contains("VK")) {
+					if (ruutu.laillinenSiirto(ruutu, nappula, shakkiLautaRuudut)) {
+						if ((nappula.y == 0 || nappula.y == 7) && nappula.id.contains("S")) {
+							nappula = nappula.korota(nappula, valkeanKorotukset);
+							valkeanKorotukset += 1;
+						}
+						ruutu.lisaaNappula(ruutu, nappula);
+						if (onkoShakki) {
+							onkoShakki = false;
+							valkeanKuninkaanRuutu.setBorder(null);
+						}
+						if (nappula.id.contains("VK")) {
+							valkeanKuninkaanRuutu = ruutu;
+						}
+								
+						tarkistaMahdollisetSiirrot();
+						shakkiLauta.revalidate();
+						shakkiLauta.repaint();
+							
+						//TODO: reaktio shakkiin, ei saa liikkua hyokattyyn ruutuun, ei saa liikuttaa pinnattua nappulaa
+								
+						onkoMatti = ruutu.tarkistaLauta(shakkiLautaRuudut);
+						if (onkoMatti) {
+							ikkuna.dispatchEvent(new WindowEvent(ikkuna, WindowEvent.WINDOW_CLOSING));
+						}
+						tarkistaTekoalynSiirrot();
+					} else {
+						edellinenRuutu.lisaaNappula(edellinenRuutu, nappula);
 					}
-					ruutu.lisaaNappula(ruutu, nappula);
-						
-					if (nappula.id.contains("VK")) {
-						valkeanKuninkaanRuutu = ruutu;
-					}
-						
-					tarkistaMahdollisetSiirrot();
-					shakkiLauta.revalidate();
-					shakkiLauta.repaint();
-					
-					//TODO: reaktio shakkiin
-						
-					onkoMatti = ruutu.tarkistaLauta(shakkiLautaRuudut);
-					if (onkoMatti) {
-						ikkuna.dispatchEvent(new WindowEvent(ikkuna, WindowEvent.WINDOW_CLOSING));
-					}
-					tarkistaTekoalynSiirrot();
-				}
-				else {
+				} else {
 					edellinenRuutu.lisaaNappula(edellinenRuutu, nappula);
 				}
 			}
@@ -169,14 +178,12 @@ public class Kayttoliittyma implements MouseListener{
      * Tarkistaa mahdolliset siirrot ja merkitsee kuninkaan ruudun reunukset punaiseksi mikali on shakki. 
      */
 	private void tarkistaMahdollisetSiirrot() {
-		mahdollisetSiirrot.clear();
 		for(int i=0;i<8;i++) {
 			for(int j=0;j<8;j++) {
 				if (shakkiLautaRuudut[j][i].nappulanVari(shakkiLautaRuudut[j][i]) != edellinenVari) {
 					for(int k=0;k<8;k++) {
 						for (int l=0;l<8;l++) {
 							if (shakkiLautaRuudut[j][i].laillinenSiirto(shakkiLautaRuudut[j][i], shakkiLautaRuudut[l][k], shakkiLautaRuudut)) {
-								mahdollisetSiirrot.add(shakkiLautaRuudut[l][k]);
 								if (shakkiLautaRuudut[l][k].onkoRuudutSamat(shakkiLautaRuudut[l][k], tummanKuninkaanRuutu)) {
 									onkoShakki = true;
 									tummanKuninkaanRuutu.setBorder(BorderFactory.createLineBorder(Color.red));
@@ -198,7 +205,9 @@ public class Kayttoliittyma implements MouseListener{
      */
 	private void tarkistaTekoalynSiirrot() {
 		edellinenVari = 1;
-		mahdollisetSiirrot.clear();
+		tummanMahdollisetSiirrot.clear();
+		tummanHyokatytRuudut.clear();
+		tummanLahtoRuudut.clear();
 		lahtoRuudut.clear();
 		for(int i=0;i<8;i++) {
 			for(int j=0;j<8;j++) {
@@ -207,14 +216,23 @@ public class Kayttoliittyma implements MouseListener{
 						for (int l=0;l<8;l++) {
 							if (shakkiLautaRuudut[j][i].laillinenSiirto(shakkiLautaRuudut[j][i], shakkiLautaRuudut[l][k], shakkiLautaRuudut)) {
 								lahtoRuudut.add(shakkiLautaRuudut[j][i]);
-								mahdollisetSiirrot.add(shakkiLautaRuudut[l][k]);
+								tummanMahdollisetSiirrot.add(shakkiLautaRuudut[l][k]);
+							}
+							if ((shakkiLautaRuudut[j][i].laillinenSiirtoErillinen(shakkiLautaRuudut[j][i], shakkiLautaRuudut[l][k], shakkiLautaRuudut)) || (shakkiLautaRuudut[j][i].hyokkaakoRuutuun(shakkiLautaRuudut[j][i], shakkiLautaRuudut[l][k]))) {
+								tummanLahtoRuudut.add(shakkiLautaRuudut[j][i]);
+								tummanHyokatytRuudut.add(shakkiLautaRuudut[l][k]);
 							}
 						}
 					}
 				}
 			}
 		}
-		Ruutu[] ruudut = tekoaly.valitseSiirto(mahdollisetSiirrot, lahtoRuudut);
+        for (int i = 0; i < tummanHyokatytRuudut.size(); i++) {
+        	int[] koords = tummanHyokatytRuudut.get(i).koordinaatit(tummanLahtoRuudut.get(i), tummanHyokatytRuudut.get(i));
+            System.out.print("(" + koords[0] + "," + koords[1] + "," + koords[2] + "," + koords[3] + ")" + " ");
+        }
+        System.out.println();
+		Ruutu[] ruudut = tekoaly.valitseSiirto(tummanMahdollisetSiirrot, lahtoRuudut);
 		nappula = ruudut[0].poistaNappula(ruudut[0]);
 		if (nappula != null) {
 			if (ruudut[1].laillinenSiirto(ruudut[1], nappula, shakkiLautaRuudut)) {
@@ -223,10 +241,28 @@ public class Kayttoliittyma implements MouseListener{
 					tummanKorotukset += 1;
 				}
 				ruudut[1].lisaaNappula(ruudut[1], nappula);
+				if (onkoShakki) {
+					onkoShakki = false;
+					tummanKuninkaanRuutu.setBorder(null);
+				}
 			}
 		}
 		if (nappula.id.contains("TK")) {
 			tummanKuninkaanRuutu = ruudut[1];
+		}
+		tummanHyokatytRuudut.clear();
+		for(int i=0;i<8;i++) {
+			for(int j=0;j<8;j++) {
+				if (shakkiLautaRuudut[j][i].nappulanVari(shakkiLautaRuudut[j][i]) == 0) {
+					for(int k=0;k<8;k++) {
+						for (int l=0;l<8;l++) {
+							if ((shakkiLautaRuudut[j][i].laillinenSiirtoErillinen(shakkiLautaRuudut[j][i], shakkiLautaRuudut[l][k], shakkiLautaRuudut)) || (shakkiLautaRuudut[j][i].hyokkaakoRuutuun(shakkiLautaRuudut[j][i], shakkiLautaRuudut[l][k]))) {
+								tummanHyokatytRuudut.add(shakkiLautaRuudut[l][k]);
+							}
+						}
+					}
+				}
+			}
 		}
 		tarkistaMahdollisetSiirrot();
 		shakkiLauta.revalidate();

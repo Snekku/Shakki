@@ -34,6 +34,18 @@ public abstract class Nappula {
 	}
 	
 	/**
+	 * Kutsuu kyseessa olevan nappulan omaa tarkistus metodia. Erillinen metodi hyokattyjen ruutujen tarkistukseen.
+	 * @param ruutu Ruutu, josta ollaan siirtymassa.
+	 * @param ruutu2 Ruutu, johon ollaan siirtymassa.
+	 * @param nappula Nappula, jota yritetaan siirtaa.
+	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot 
+ 	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
+	 */
+	protected Boolean nappulanLaillinenSiirtoErillinen(Ruutu ruutu, Ruutu ruutu2, Nappula nappula, Ruutu[][] shakkiLautaRuudut) {
+		return nappula.nappulanLaillinenSiirtoErillinen(ruutu, ruutu2, nappula, shakkiLautaRuudut);
+	}
+	
+	/**
 	 * Korottaa nappulan.
 	 * @param nappula Nappula, joka korotetaan
 	 * @return Palauttaa nappulan.
@@ -86,4 +98,16 @@ public abstract class Nappula {
 		return true;
 	}
 	
+	/**
+	 * Tarkistaa hyokkaako ruudussa oleva nappula ruutuun2. Palauttaa automaattisesti true kaikkien muiden paitsi sotilaan kohdalla.
+	 * @param ruutu Ruutu, josta ollaan liikkumassa.
+	 * @param ruutu2 Ruutu, johon ollaan liikkumassa.
+	 * @return Palauttaa true tai false sen mukaan hyokataanko ruutuun.
+	 */
+	protected Boolean hyokkaakoRuutuun(Ruutu ruutu, Ruutu ruutu2, Nappula nappula) {
+		if (nappula.id.contains("S")) {
+			return nappula.hyokkaakoRuutuun(ruutu, ruutu2, nappula);
+		}
+		return false;
+	}
 }

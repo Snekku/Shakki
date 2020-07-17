@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -113,6 +114,23 @@ public class Ruutu extends JPanel {
 	}
 	
 	/**
+	 * Kutsuu nappulan tarkistus metodia. Erillinen metodi hyokattyjen ruutujen tarkistukseen.
+	 * @param ruutu Ruutu, josta ollaan siirtymassa.
+	 * @param ruutu2 Ruutu, johon ollaan siirtymassa.
+	 * @param shakkiLautaRuudut matriisi, jossa tallessa laudan ruutujen tiedot
+	 * @return Palauttaa true tai false, sen mukaan onko siirto laillinen.
+	 */
+	protected Boolean laillinenSiirtoErillinen(Ruutu ruutu, Ruutu ruutu2, Ruutu[][] shakkiLautaRuudut) {
+		if (ruutu.nappula != null) {
+			if (ruutu.nappula.id.contains("S")) {
+				return false;
+			}
+			return ruutu.nappula.nappulanLaillinenSiirtoErillinen(ruutu, ruutu2, ruutu.nappula, shakkiLautaRuudut);
+		}
+		return false;
+	}
+	
+	/**
 	 * Vertaa ruudun ja nappulan koordinaatteja.
 	 * @param ruutu Ruutu, johon siirrytaan.
 	 * @param X Nappulan X-koordinaatti.
@@ -213,6 +231,47 @@ public class Ruutu extends JPanel {
 		if (valkeaKuningas && tummaKuningas) {
 			return false;
 		}
+		return true;
+	}
+	
+	/**
+	 * Tarkistaa hyokkaako ruudussa oleva nappula ruutuun2. Palauttaa automaattisesti true kaikkien muiden paitsi sotilaan kohdalla.
+	 * @param ruutu Ruutu, josta ollaan liikkumassa.
+	 * @param ruutu2 Ruutu, johon ollaan liikkumassa.
+	 * @return Palauttaa true tai false sen mukaan hyokataanko ruutuun.
+	 */
+	protected Boolean hyokkaakoRuutuun(Ruutu ruutu, Ruutu ruutu2) {
+		return ruutu.nappula.hyokkaakoRuutuun(ruutu, ruutu2, ruutu.nappula);
+	}
+	
+	
+	/**
+	 * Tarkistaa hyokkaako ruudussa oleva nappula ruutuun2. Palauttaa automaattisesti true kaikkien muiden paitsi sotilaan kohdalla.
+	 * @param ruutu Ruutu, josta ollaan liikkumassa.
+	 * @param ruutu2 Ruutu, johon ollaan liikkumassa.
+	 * @return Palauttaa true tai false sen mukaan hyokataanko ruutuun.
+	 */
+	protected int[] koordinaatit(Ruutu ruutu, Ruutu ruutu2) {
+		int[] koords = new int[4];
+		koords[0] = ruutu.x;
+		koords[1] = ruutu.y;
+		koords[2] = ruutu2.x;
+		koords[3] = ruutu2.y;
+		return koords;
+	}
+	
+	/**
+	 * Tarkistaa onko kuningas liikkumassa hyokattyyn ruutuun.
+	 * @param ruutu Ruutu, johon ollaan liikkumassa.
+	 * @param mahdollisetSiirrot Lista vastustajan mahdollisista siirroista.
+	 * @return Palauttaa true tai false sen mukaan hyokataanko ruutuun.
+	 */
+	protected boolean onkoHyokattyRuutu(Ruutu ruutu, List<Ruutu> mahdollisetSiirrot) {
+	    for (int i = 0; i < mahdollisetSiirrot.size(); i++) {
+	    	if (onkoRuudutSamat(ruutu, mahdollisetSiirrot.get(i))) {
+	    		return false;
+	    	}
+	    }
 		return true;
 	}
 }
