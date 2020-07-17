@@ -131,7 +131,10 @@ public class Sotilas extends Nappula {
 	 */
 	protected Boolean hyokkaakoRuutuun(Ruutu ruutu, Ruutu ruutu2, Nappula nappula) {
 		int[] koordinaatit = ruutu2.vertaaKoordinaatit(ruutu2, nappula.x, nappula.y);
-		if ((koordinaatit[0] == 1 || koordinaatit[0] == -1) && koordinaatit[1] == 1) {
+		if ((koordinaatit[0] == 1 || koordinaatit[0] == -1) && (koordinaatit[1] == 1 && nappula.vari == 0)) {
+			return true;
+		}
+		if ((koordinaatit[0] == 1 || koordinaatit[0] == -1) && (koordinaatit[1] == -1 && nappula.vari == 1)) {
 			return true;
 		}
 		return false;
