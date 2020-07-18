@@ -6,7 +6,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- * Lahetti luokka. Taydentaa Nappula luokkaa.
+ * Lahetti luokka. Taydentaa Nappula luokkaa. Vastaa lahetin toimintalogiikasta (miten saa liikkua).
+ * @author Joni Piispanen
  */
 public class Lahetti extends Nappula {
 	

@@ -6,7 +6,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- * Kuningas luokka. Taydentaa Nappula luokkaa.
+ * Kuningas luokka. Taydentaa Nappula luokkaa. Vastaa kuninkaan toimintalogiikasta (miten saa liikkua) ja linnoittautumisesta.
+ * @author Joni Piispanen
  */
 public class Kuningas extends Nappula {
 	

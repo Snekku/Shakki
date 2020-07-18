@@ -1,7 +1,9 @@
 import javax.swing.JLabel;
 
 /**
- * Nappula luokka, nappulat (sotilas, yms.) laajentavat tata luokkaa.
+ * Nappula luokka, nappulat (sotilas, yms.) laajentavat tata luokkaa. Vastaa nappuloille yhteisista asioista ja kutsuu sille tuodun nappulan
+ * omia metodeja nappulan luokan mukaan.
+ * @author Joni Piispanen
  */
 public abstract class Nappula {
 	

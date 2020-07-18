@@ -7,7 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * Ruutu luokka.
+ * Ruutu luokka. Vastaa nappuloiden liikkumisesta, mukaan lukien syomisen. Sisaltaa myos muita tarkeita toiminnallisuuksia, kuten
+ * nappuloiden koordinaattien paivityksen ja laudan tarkistuksen.
+ * @author Joni Piispanen
  */
 public class Ruutu extends JPanel {
 

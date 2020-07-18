@@ -6,7 +6,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- * Sotilas luokka. Taydentaa Nappula luokkaa.
+ * Sotilas luokka. Taydentaa Nappula luokkaa. Vastaa sotilaan toimintalogiikasta (miten saa liikkua) ja korotuksesta.
+ * @author Joni Piispanen
  */
 public class Sotilas extends Nappula {
 	

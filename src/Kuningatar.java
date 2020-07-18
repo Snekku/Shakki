@@ -6,7 +6,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- * Kuningatar luokka. Taydentaa Nappula luokkaa.
+ * Kuningatar luokka. Taydentaa Nappula luokkaa. Vastaa kuningattaren toimintalogiikasta (miten saa liikkua).
+ * @author Joni Piispanen
  */
 public class Kuningatar extends Nappula {
 	

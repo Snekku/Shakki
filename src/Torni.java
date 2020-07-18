@@ -6,7 +6,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- * Torni luokka. Taydentaa Nappula luokkaa.
+ * Torni luokka. Taydentaa Nappula luokkaa. Vastaa tornin toimintalogiikasta (miten saa liikkua) ja pitaa huolta linnoittautumisen kannalta
+ * tarkeista seikoista.
+ * @author Joni Piispanen
  */
 public class Torni extends Nappula {
 	

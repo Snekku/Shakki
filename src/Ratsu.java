@@ -6,7 +6,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
- * Ratsu luokka. Taydentaa Nappula luokkaa.
+ * Ratsu luokka. Taydentaa Nappula luokkaa. Vastaa ratsun toimintalogiikasta (miten saa liikkua).
+ * @author Joni Piispanen
  */
 public class Ratsu extends Nappula {
 	

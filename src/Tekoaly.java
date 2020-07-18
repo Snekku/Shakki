@@ -2,7 +2,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Tekoaly luokka.
+ * Tekoaly luokka. Valitsee talla hetkella satunnaisesti siirron sille tuoduista mahdollisista siirroista.
+ * @author Joni Piispanen
  */
 public class Tekoaly {
 	

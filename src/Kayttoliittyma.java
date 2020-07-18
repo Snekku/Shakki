@@ -13,7 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 /**
- * Kayttoliittyma-luokka.
+ * Kayttoliittyma-luokkassa, luodaan peliin tarvittavat graafiset elementit. 
+ * Kyseisessa luokassa luodaan kaikki muut visuaaliset komponentit, paitsi nappuloiden kuvakkeet ja ruutujen varit. 
+ * Ensimmaiseksi luokka luo ikkunan, johon myohemmin lisataan shakkilauta ja nappulat. Kun ikkuna on luotu kutsuu ohjelma alusta-metodia, 
+ * jonka tehtava on luoda shakkilaudan ruudut ja lisata niihin nappulat. Kun lauta on alustettu alkaa luokka kuuntelemaan pelaajan hiiren painalluksia.
+ * Vastaa myos tekoalyn siirroista, kutsumalla tekoaly-luokkaa.
+ * @author Joni Piispanen
  */
 public class Kayttoliittyma implements MouseListener{
 	
