@@ -1,5 +1,4 @@
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -28,7 +27,7 @@ public class Torni extends Nappula {
 		
 		Image image = null;
 		try {
-			image = ImageIO.read(new File("src/Kuvakkeet/Rook" + Integer.toString(vari) + ".png"));
+			image = ImageIO.read(getClass().getResource("Kuvakkeet/Rook" + Integer.toString(vari) + ".png"));
 		} catch (IOException e) {
 			
 		}

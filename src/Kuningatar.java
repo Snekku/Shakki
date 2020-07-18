@@ -1,5 +1,4 @@
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -26,7 +25,7 @@ public class Kuningatar extends Nappula {
 		
 		Image image = null;
 		try {
-			image = ImageIO.read(new File("src/Kuvakkeet/Queen" + Integer.toString(vari) + ".png"));
+			image = ImageIO.read(getClass().getResource("Kuvakkeet/Queen" + Integer.toString(vari) + ".png"));
 		} catch (IOException e) {
 			
 		}
